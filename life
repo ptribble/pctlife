@@ -1,0 +1,24 @@
+#!/bin/sh
+case $1 in
+'-build')
+	PATH=/usr/jdk/instances/jdk1.5.0/bin:$PATH
+	export PATH
+	javac uk/co/petertribble/life/*.java
+	jar -cmf life.manifest life.jar uk/co/petertribble/life/*.class pixmaps/pctlife.png
+	rm uk/co/petertribble/life/*.class
+	exit 0
+	;;
+'-package')
+	./pkg/mkproto > pp
+	pkgmk -d /tmp -f pp -r `pwd` TRIBpctlife
+	pkgtrans -s /tmp /tmp/TRIBpctlife.pkg TRIBpctlife
+	rm pp
+	cd /tmp
+	zip -q -r TRIBpctlife TRIBpctlife
+	mv TRIBpctlife.zip TRIBpctlife.zap
+	rm -fr /tmp/TRIBpctlife
+	ls -l /tmp/TRIBpctlife.pkg /tmp/TRIBpctlife.zap
+	exit 0
+	;;
+esac
+exec java -jar life.jar $*

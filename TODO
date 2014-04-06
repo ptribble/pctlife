@@ -1,0 +1,15 @@
+TODO for pctlife
+
+finish package creation
+ - postinstall script (image cache)
+
+Add pause/resume; save while paused?
+
+Add load of a life pattern from the menu
+
+Support other life rules (as in the #R specifier in the life pattern
+format).
+
+Make it faster; much faster (probably accelerated graphics)
+
+Autoscale to allow the import of the larger life patterns.
