@@ -21,3 +21,5 @@ lifeapplet.html file.
 
 Version 1.4 is fully packaged, including a custom application icon and
 desktop file
+
+The applet has now been removed, as nothing on the modern web will run it.
