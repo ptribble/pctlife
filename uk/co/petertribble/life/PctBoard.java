@@ -129,7 +129,7 @@ public class PctBoard extends JPanel implements ActionListener {
 	    String line = null;
 	    try {
 		line = input.readLine();
-		if (!line.startsWith("#Life")) {
+		if (line == null || !line.startsWith("#Life")) {
 		    return false;
 		}
 		while (( line = input.readLine()) != null) {
