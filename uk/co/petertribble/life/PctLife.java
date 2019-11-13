@@ -47,11 +47,13 @@ public class PctLife extends JFrame implements ActionListener {
      * will always be an invisible 1-cell strip around the border.
      */
     private static final int DEFAULT_BOARD_SIZE = 128;
+    private static final int MIN_BOARD_SIZE = 32;
 
     /*
      * The default size, in pixels, of each cell.
      */
     private static final int DEFAULT_CELL_SIZE = 5;
+    private static final int MIN_CELL_SIZE = 1;
 
     /*
      * Menu buttons.
@@ -143,17 +145,51 @@ public class PctLife extends JFrame implements ActionListener {
 	    while (i < args.length) {
 		if (args[i].equals("-s")) {
 		    ++i;
-		    CELL_SIZE = Integer.parseInt(args[i]);
+		    if (i < args.length) {
+			try {
+			    CELL_SIZE = Integer.parseInt(args[i]);
+			} catch (NumberFormatException ex) {
+			    System.err.println("Invalid cell size!");
+			    System.exit(1);
+			}
+			if (CELL_SIZE < MIN_CELL_SIZE) {
+			    System.err.println("Cell size too small!");
+			    System.exit(1);
+			}
+		    } else {
+			System.err.println("Expecting an argument to -s!");
+			System.exit(1);
+		    }
 		} else if (args[i].equals("-b")) {
 		    ++i;
-		    BOARD_SIZE = Integer.parseInt(args[i]);
+		    if (i < args.length) {
+			try {
+			    BOARD_SIZE = Integer.parseInt(args[i]);
+			} catch (NumberFormatException ex) {
+			    System.err.println("Invalid board size!");
+			    System.exit(1);
+			}
+			if (BOARD_SIZE < MIN_BOARD_SIZE) {
+			    System.err.println("Board size too small!");
+			    System.exit(1);
+			}
+		    } else {
+			System.err.println("Expecting an argument to -b!");
+			System.exit(1);
+		    }
 		} else {
 		    break;
 		}
 		++i;
 	    }
 	    if (i < args.length) {
-		new PctLife(new File(args[i]));
+		File fin = new File(args[i]);
+		if (fin.exists()) {
+		    new PctLife(fin);
+		} else {
+		    System.err.println("File " + fin + " does not exist!");
+		    System.exit(1);
+		}
 	    } else {
 		new PctLife();
 	    }
