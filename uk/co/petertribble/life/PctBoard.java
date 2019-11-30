@@ -311,7 +311,7 @@ public class PctBoard extends JPanel implements ActionListener {
 	for (int i = 0; i < BOARD_SIZE; i++) {
 	    for (int j = 0; j < BOARD_SIZE; j++) {
 		if (labels[i][j]) {
-		    g2.fill(new Rectangle2D.Double(dw*i, dw*j, ddw, ddh));
+		    g2.fill(new Rectangle2D.Double(dw*i, dh*j, ddw, ddh));
 		}
 	    }
 	}
