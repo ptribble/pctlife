@@ -142,7 +142,7 @@ public class PctBoard extends JPanel implements ActionListener {
 			} catch (NumberFormatException nfe) {
 			    return false;
 			}
-		    } else if (line.startsWith("#")) {
+		    } else if (line.startsWith("#")) { //NOPMD
 			// continue
 			// FIXME check for #R and #N
 		    } else {
