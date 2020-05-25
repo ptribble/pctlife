@@ -62,7 +62,7 @@ public class PctLife extends JFrame implements ActionListener {
     private JMenuItem newItem;
     private JMenuItem stopItem;
 
-    private static int BOARD_SIZE = DEFAULT_BOARD_SIZE; 
+    private static int BOARD_SIZE = DEFAULT_BOARD_SIZE;
     private static int CELL_SIZE = DEFAULT_CELL_SIZE;
 
     /**

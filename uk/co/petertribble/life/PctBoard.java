@@ -93,7 +93,7 @@ public class PctBoard extends JPanel implements ActionListener {
 		oldgen[i+1][j+1] = (Math.random() < FILL_FACTOR) ? 1 : 0;
 		labels[i][j] = (oldgen[i+1][j+1] == 1);
 	    }
-	}	
+	}
 	repaint();
     }
 
@@ -102,12 +102,12 @@ public class PctBoard extends JPanel implements ActionListener {
 	    for (int j = 0; j < BOARD_SIZE+2; j++) {
 		oldgen[i][j] = 0;
 	    }
-	}	
+	}
 	for (int i = 0; i < BOARD_SIZE; i++) {
 	    for (int j = 0; j < BOARD_SIZE; j++) {
 		labels[i][j] = false;
 	    }
-	}	
+	}
     }
 
     /*
@@ -132,7 +132,7 @@ public class PctBoard extends JPanel implements ActionListener {
 		if (line == null || !line.startsWith("#Life")) {
 		    return false;
 		}
-		while (( line = input.readLine()) != null) {
+		while ((line = input.readLine()) != null) {
 		    if (line.startsWith("#P")) {
 			String[] ds = line.split("\\s+", 3);
 			try {
@@ -221,9 +221,12 @@ public class PctBoard extends JPanel implements ActionListener {
 	// end edges
 	// do corners
 	newgen[0][0] = oldgen[0][1] + oldgen[1][1] + oldgen[1][0];
-	newgen[0][BOARD_SIZE+1] = oldgen[0][BOARD_SIZE] + oldgen[1][BOARD_SIZE] + oldgen[1][BOARD_SIZE+1];
-	newgen[BOARD_SIZE+1][0] = oldgen[BOARD_SIZE][0] + oldgen[BOARD_SIZE][1] + oldgen[BOARD_SIZE+1][1];
-	newgen[BOARD_SIZE+1][BOARD_SIZE+1] = oldgen[BOARD_SIZE][BOARD_SIZE+1] + oldgen[BOARD_SIZE+1][BOARD_SIZE] + oldgen[BOARD_SIZE][BOARD_SIZE];
+	newgen[0][BOARD_SIZE+1] = oldgen[0][BOARD_SIZE] + oldgen[1][BOARD_SIZE]
+	    + oldgen[1][BOARD_SIZE+1];
+	newgen[BOARD_SIZE+1][0] = oldgen[BOARD_SIZE][0] + oldgen[BOARD_SIZE][1]
+	    + oldgen[BOARD_SIZE+1][1];
+	newgen[BOARD_SIZE+1][BOARD_SIZE+1] = oldgen[BOARD_SIZE][BOARD_SIZE+1]
+	    + oldgen[BOARD_SIZE+1][BOARD_SIZE] + oldgen[BOARD_SIZE][BOARD_SIZE];
 	// end corners
 	for (int i = 0; i < BOARD_SIZE+2; i++) {
 	    for (int j = 0; j < BOARD_SIZE+2; j++) {
