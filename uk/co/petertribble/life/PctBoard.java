@@ -90,8 +90,8 @@ public class PctBoard extends JPanel implements ActionListener {
     public void randomize() {
 	for (int i = 0; i < BOARD_SIZE; i++) {
 	    for (int j = 0; j < BOARD_SIZE; j++) {
-		oldgen[i+1][j+1] = (Math.random() < FILL_FACTOR) ? 1 : 0;
-		labels[i][j] = (oldgen[i+1][j+1] == 1);
+		oldgen[i+1][j+1] = Math.random() < FILL_FACTOR ? 1 : 0;
+		labels[i][j] = oldgen[i+1][j+1] == 1;
 	    }
 	}
 	repaint();
@@ -239,7 +239,7 @@ public class PctBoard extends JPanel implements ActionListener {
 	}
 	for (int i = 0; i < BOARD_SIZE; i++) {
 	    for (int j = 0; j < BOARD_SIZE; j++) {
-		labels[i][j] = (oldgen[i+1][j+1] == 1);
+		labels[i][j] = oldgen[i+1][j+1] == 1;
 	    }
 	}
 	repaint();
@@ -250,11 +250,11 @@ public class PctBoard extends JPanel implements ActionListener {
      * with different rules.
      */
     private boolean isAlive(int i) {
-	return ((i == 2) || (i == 3));
+	return i == 2 || i == 3;
     }
 
     private boolean isBorn(int i) {
-	return (i == 3);
+	return i == 3;
     }
 
     public static Color getLiveColor() {
