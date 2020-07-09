@@ -32,10 +32,10 @@ import java.awt.event.*;
  */
 public class PctColorMenu extends JMenu implements ActionListener {
 
-    private PctBoard board;
+    private final PctBoard board;
 
-    private JMenuItem fgItem;
-    private JMenuItem bgItem;
+    private final JMenuItem fgItem;
+    private final JMenuItem bgItem;
 
     public PctColorMenu(PctBoard board) {
 	super("Colours");

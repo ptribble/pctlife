@@ -48,9 +48,9 @@ public class PctBoard extends JPanel implements ActionListener {
     private static Color livecolor = Color.RED;
     private static Color deadcolor = Color.black;
 
-    private int BOARD_SIZE;
-    private int BOARD_MID;
-    private int CELL_SIZE;
+    private final int BOARD_SIZE;
+    private final int BOARD_MID;
+    private final int CELL_SIZE;
 
     /*
      * A Timer, to update the model in a loop.

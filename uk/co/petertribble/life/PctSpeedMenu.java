@@ -32,13 +32,13 @@ import java.awt.event.*;
  */
 public class PctSpeedMenu extends JMenu implements ActionListener {
 
-    private PctBoard board;
+    private final PctBoard board;
 
-    private JRadioButtonMenuItem slowSpeed;
-    private JRadioButtonMenuItem normSpeed;
-    private JRadioButtonMenuItem fastSpeed;
-    private JRadioButtonMenuItem zoomSpeed;
-    private JRadioButtonMenuItem insaneSpeed;
+    private final JRadioButtonMenuItem slowSpeed;
+    private final JRadioButtonMenuItem normSpeed;
+    private final JRadioButtonMenuItem fastSpeed;
+    private final JRadioButtonMenuItem zoomSpeed;
+    private final JRadioButtonMenuItem insaneSpeed;
 
     public PctSpeedMenu(PctBoard board) {
 	super("Speed");
