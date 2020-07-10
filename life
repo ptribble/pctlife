@@ -19,7 +19,7 @@ case $1 in
 	exit 0
 	;;
 '-pmd')
-	PMDRULES="imports typeresolution clone finalizers sunsecure unusedcode braces migrating strictexception empty unnecessary"
+	PMDRULES="imports typeresolution clone finalizers sunsecure unusedcode braces migrating strictexception empty unnecessary basic strings"
 	PMDCATRULES="security"
 	RULESETS=""
 	for RULE in $PMDRULES
