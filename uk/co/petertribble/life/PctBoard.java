@@ -119,6 +119,7 @@ public class PctBoard extends JPanel implements ActionListener {
     public boolean loadPattern(File f) {
 	blank();
 	if (!f.exists()) {
+	    System.err.println("Missing input file.");
 	    return false;
 	}
 	int x = 0;
@@ -130,6 +131,7 @@ public class PctBoard extends JPanel implements ActionListener {
 	    try {
 		line = input.readLine();
 		if (line == null || !line.startsWith("#Life")) {
+		    System.err.println("Invalid input file.");
 		    return false;
 		}
 		while ((line = input.readLine()) != null) {
