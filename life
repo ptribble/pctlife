@@ -12,10 +12,14 @@ case $1 in
 	pkgtrans -s /tmp /tmp/TRIBpctlife.pkg TRIBpctlife
 	rm pp
 	cd /tmp
-	zip -q -r TRIBpctlife TRIBpctlife
-	mv TRIBpctlife.zip TRIBpctlife.zap
+	if [ -x ${THOME}/build/create_zap_from_pkg ]; then
+	    ${THOME}/build/create_zap_from_pkg TRIBpctlife /tmp/TRIBpctlife.pkg
+	else
+	    zip -q -r TRIBpctlife TRIBpctlife
+	    mv TRIBpctlife.zip TRIBpctlife.zap
+	    ls -l /tmp/TRIBpctlife.pkg /tmp/TRIBpctlife.zap
+	fi
 	rm -fr /tmp/TRIBpctlife
-	ls -l /tmp/TRIBpctlife.pkg /tmp/TRIBpctlife.zap
 	exit 0
 	;;
 '-pmd')
