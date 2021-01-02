@@ -23,7 +23,7 @@ case $1 in
 	exit 0
 	;;
 '-pmd')
-	PMDRULES="imports typeresolution clone finalizers sunsecure unusedcode braces migrating strictexception empty unnecessary basic strings"
+	PMDRULES="basic braces clone empty finalizers imports migrating strictexception strings sunsecure typeresolution unnecessary unusedcode"
 	PMDCATRULES="security"
 	RULESETS=""
 	for RULE in $PMDRULES
@@ -35,7 +35,7 @@ case $1 in
 	    RULESETS="${RULESETS},category/java/${RULE}.xml"
 	done
 	RULESETS=`echo $RULESETS|sed s:,::`
-	pmd -d uk -R $RULESETS -version 1.5 -auxclasspath `echo lib/java/* | sed 's= =:=g'` 2>/dev/null
+	pmd -d uk -R $RULESETS -version 1.8 -auxclasspath `echo lib/java/* | sed 's= =:=g'` 2>/dev/null
 	exit 0
 	;;
 esac

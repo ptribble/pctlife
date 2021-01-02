@@ -30,7 +30,6 @@ import java.awt.Color;
 import java.awt.geom.Rectangle2D;
 import java.io.File;
 import java.io.IOException;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.BufferedReader;
 import javax.swing.Timer;
@@ -125,8 +124,8 @@ public class PctBoard extends JPanel implements ActionListener {
 	int x = 0;
 	int xblock = 0;
 	int y = 0;
-	try {
-	    BufferedReader input =  new BufferedReader(new FileReader(f));
+	try (BufferedReader input =  new BufferedReader(new FileReader(f))) {
+	    //BufferedReader input =  new BufferedReader(new FileReader(f));
 	    String line = null;
 	    try {
 		line = input.readLine();
@@ -163,11 +162,10 @@ public class PctBoard extends JPanel implements ActionListener {
 			x = xblock;
 		    }
 		}
-		input.close();
 	    } catch (IOException ioe) {
 		return false;
 	    }
-	} catch (FileNotFoundException fnfe) {
+	} catch (IOException ioe) {
 	    return false;
 	}
 	repaint();
