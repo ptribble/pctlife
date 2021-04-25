@@ -126,7 +126,7 @@ public class PctBoard extends JPanel implements ActionListener {
 	int y = 0;
 	try (BufferedReader input =  new BufferedReader(new FileReader(f))) {
 	    //BufferedReader input =  new BufferedReader(new FileReader(f));
-	    String line = null;
+	    String line;
 	    try {
 		line = input.readLine();
 		if (line == null || !line.startsWith("#Life")) {
