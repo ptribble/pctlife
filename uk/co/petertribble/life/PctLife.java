@@ -106,7 +106,8 @@ public class PctLife extends JFrame implements ActionListener {
 	jm.add(new PctSpeedMenu(board));
 	setJMenuBar(jm);
 
-	setIconImage(new ImageIcon(this.getClass().getClassLoader().getResource("pixmaps/pctlife.png")).getImage());
+	setIconImage(new ImageIcon(this.getClass().getClassLoader().
+			getResource("pixmaps/pctlife.png")).getImage());
 
 	pack();
 	if (f == null) {

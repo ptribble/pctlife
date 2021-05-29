@@ -125,7 +125,6 @@ public class PctBoard extends JPanel implements ActionListener {
 	int xblock = 0;
 	int y = 0;
 	try (BufferedReader input =  new BufferedReader(new FileReader(f))) {
-	    //BufferedReader input =  new BufferedReader(new FileReader(f));
 	    String line;
 	    try {
 		line = input.readLine();
@@ -143,7 +142,7 @@ public class PctBoard extends JPanel implements ActionListener {
 			} catch (NumberFormatException nfe) {
 			    return false;
 			}
-		    } else if (line.startsWith("#")) { //NOPMD
+		    } else if (line.startsWith("#")) { // NOPMD
 			// continue
 			// FIXME check for #R and #N
 		    } else {
