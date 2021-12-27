@@ -31,42 +31,56 @@ import java.awt.event.*;
 import java.io.File;
 
 /**
- * The main driver frame for pctlife.
+ * The main driver frame for PctLife.
  */
 public class PctLife extends JFrame implements ActionListener {
 
+    /** The board to be shown. */
     private PctBoard board;
 
-    /*
+    /**
      * The update interval, 0.4s.
      */
     public static final int INTERVAL = 400;
 
-    /*
-     * The default size of the life board. This is the visible size, there
-     * will always be an invisible 1-cell strip around the border.
+    /**
+     * The default size in cells of the life board. This is the visible size,
+     * there will always be an invisible 1-cell strip around the border.
      */
     private static final int DEFAULT_BOARD_SIZE = 128;
+    /**
+     * The minimum size in cells of the life board. This is the visible size,
+     * there will always be an invisible 1-cell strip around the border.
+     */
     private static final int MIN_BOARD_SIZE = 32;
 
-    /*
+    /**
      * The default size, in pixels, of each cell.
      */
     private static final int DEFAULT_CELL_SIZE = 5;
+    /**
+     * The minimum size, in pixels, of each cell.
+     */
     private static final int MIN_CELL_SIZE = 1;
 
-    /*
-     * Menu buttons.
+    /**
+     * Menu button to exit the application.
      */
     private JMenuItem exitItem;
+    /**
+     * Menu button to start a new game.
+     */
     private JMenuItem newItem;
+    /**
+     * Menu button to stop the current game.
+     */
     private JMenuItem stopItem;
 
     private static int BOARD_SIZE = DEFAULT_BOARD_SIZE;
     private static int CELL_SIZE = DEFAULT_CELL_SIZE;
 
     /**
-     * Construct a new PctLife instance.
+     * Construct a new PctLife instance, starting with a random pattern.
      */
     public PctLife() {
 	this((File) null);

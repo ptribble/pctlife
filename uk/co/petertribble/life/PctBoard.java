@@ -47,20 +47,29 @@ public class PctBoard extends JPanel implements ActionListener {
     private static Color livecolor = Color.RED;
     private static Color deadcolor = Color.black;
 
+    /** The current size in cells of the board. */
     private final int BOARD_SIZE;
+    /** The current size in cells of the middle of the board. */
     private final int BOARD_MID;
+    /** The current cell size in pixels. */
     private final int CELL_SIZE;
 
-    /*
+    /**
      * A Timer, to update the model in a loop.
      */
     private Timer timer;
 
-    /*
-     * An array of int[] for the current and next generations.
+    /**
+     * An array of int[] for the current generation.
      */
     private int[][] oldgen;
+    /**
+     * An array of int[] for the next generation.
+     */
     private int[][] newgen;
+    /**
+     * An array of boolean[] to record the liveness of a cell..
+     */
     private boolean[][] labels;
 
     /**
@@ -86,6 +95,9 @@ public class PctBoard extends JPanel implements ActionListener {
 	setBackground(Color.BLACK.brighter());
     }
 
+    /**
+     * Populate the board with random data.
+     */
     public void randomize() {
 	for (int i = 0; i < BOARD_SIZE; i++) {
 	    for (int j = 0; j < BOARD_SIZE; j++) {
@@ -109,11 +121,13 @@ public class PctBoard extends JPanel implements ActionListener {
 	}
     }
 
-    /*
+    /**
      * Import a life pattern. If there's a problem, return false and the board
      * will be left in an indeterminate state.
      *
      * @param f the File to read in
+     *
+     * @return false in the event of a problem
      */
     public boolean loadPattern(File f) {
 	blank();
@@ -174,7 +188,9 @@ public class PctBoard extends JPanel implements ActionListener {
 	labels[i][j] = true;
     }
 
-    /*
+    /**
+     * Run one step of the game.
+     *
      * Essentially, just add up the values of the neighbouring cells.
      */
     public void step() {
@@ -254,26 +270,49 @@ public class PctBoard extends JPanel implements ActionListener {
 	return i == 3;
     }
 
+    /**
+     * Get the current live (foreground) color.
+     *
+     * @return The current Color of live cells.
+     */
     public static Color getLiveColor() {
 	return livecolor;
     }
 
+    /**
+     * Set the foreground color.
+     *
+     * @param newColor The new foreground color.
+     */
     public void setfg(Color newColor) {
 	if (newColor != null) {
 	    livecolor = newColor;
 	}
     }
 
+    /**
+     * Get the current dead (background) color.
+     *
+     * @return The current Color of dead cells.
+     */
     public static Color getDeadColor() {
 	return deadcolor;
     }
 
+    /**
+     * Set the background color.
+     *
+     * @param newColor The new background color.
+     */
     public void setbg(Color newColor) {
 	if (newColor != null) {
 	    deadcolor = newColor;
 	}
     }
 
+    /**
+     * Start the game.
+     */
     public void startLoop() {
 	if (timer == null) {
 	    timer = new Timer(PctLife.INTERVAL, this);
@@ -281,6 +320,9 @@ public class PctBoard extends JPanel implements ActionListener {
 	timer.start();
     }
 
+    /**
+     * Pause the game if it's running, restart it if paused.
+     */
     public void stopstart() {
 	if (timer != null) {
 	    if (timer.isRunning()) {
@@ -291,6 +333,11 @@ public class PctBoard extends JPanel implements ActionListener {
 	}
     }
 
+    /**
+     * Set the delay between steps in the game.
+     *
+     * @param i the desired delay in milliseconds.
+     */
     public void setDelay(int i) {
 	if (timer != null) {
 	    timer.setDelay(i);

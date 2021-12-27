@@ -28,15 +28,24 @@ import javax.swing.JMenuItem;
 import java.awt.event.*;
 
 /**
- * A menu to allow colors to be set.
+ * A menu to allow colors to be chosen.
  */
 public class PctColorMenu extends JMenu implements ActionListener {
 
+    /** The board to apply the color change to. */
     private final PctBoard board;
 
+    /** Menu Item for selecting foreground color. */
     private final JMenuItem fgItem;
+    /** Menu Item for selecting background color. */
     private final JMenuItem bgItem;
 
+    /**
+     * Create a menu to allow foreground and background colors to be
+     * selected for the given board.
+     *
+     * @param board the board to set the colors for
+     */
     public PctColorMenu(PctBoard board) {
 	super("Colours");
 	this.board = board;

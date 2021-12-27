@@ -6,6 +6,12 @@ case $1 in
 	rm uk/co/petertribble/life/*.class
 	exit 0
 	;;
+'-javadoc')
+	rm -fr javadoc
+	mkdir javadoc
+	javadoc -Xdoclint:all -d javadoc uk.co.petertribble.life
+	exit 0
+	;;
 '-package')
 	./pkg/mkproto > pp
 	pkgmk -d /tmp -f pp -r `pwd` TRIBpctlife

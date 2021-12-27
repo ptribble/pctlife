@@ -32,14 +32,25 @@ import java.awt.event.*;
  */
 public class PctSpeedMenu extends JMenu implements ActionListener {
 
+    /** The board to apply the speed change to. */
     private final PctBoard board;
 
+    /** Menu Item for a slow speed. */
     private final JRadioButtonMenuItem slowSpeed;
+    /** Menu Item for normal speed. */
     private final JRadioButtonMenuItem normSpeed;
+    /** Menu Item for a fast speed. */
     private final JRadioButtonMenuItem fastSpeed;
+    /** Menu Item for a zoom speed. */
     private final JRadioButtonMenuItem zoomSpeed;
+    /** Menu Item for an insane speed. */
     private final JRadioButtonMenuItem insaneSpeed;
 
+    /**
+     * Create a menu to allow game speed to be selected for the given board.
+     *
+     * @param board the board to set the speed for
+     */
     public PctSpeedMenu(PctBoard board) {
 	super("Speed");
 	this.board = board;
