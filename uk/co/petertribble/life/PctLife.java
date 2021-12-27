@@ -113,7 +113,9 @@ public class PctLife extends JFrame implements ActionListener {
 	if (f == null) {
 	    board.randomize();
 	} else {
-	    board.loadPattern(f);
+	    if (!board.loadPattern(f)) {
+		bailOut("Failed to load pattern");
+	    }
 	}
 	setVisible(true);
 	board.startLoop();
@@ -135,6 +137,11 @@ public class PctLife extends JFrame implements ActionListener {
 	}
     }
 
+    private static void bailOut(String msg) {
+	System.err.println(msg); //NOPMD
+	System.exit(1);
+    }
+
     /**
      * Create a new Life game.
      *
@@ -144,39 +151,33 @@ public class PctLife extends JFrame implements ActionListener {
 	if (args.length > 0) {
 	    int i = 0;
 	    while (i < args.length) {
-		if (args[i].equals("-s")) {
+		if ("-s".equals(args[i])) {
 		    ++i;
 		    if (i < args.length) {
 			try {
 			    CELL_SIZE = Integer.parseInt(args[i]);
 			} catch (NumberFormatException ex) {
-			    System.err.println("Invalid cell size!");
-			    System.exit(1);
+			    bailOut("Invalid cell size!");
 			}
 			if (CELL_SIZE < MIN_CELL_SIZE) {
-			    System.err.println("Cell size too small!");
-			    System.exit(1);
+			    bailOut("Cell size too small!");
 			}
 		    } else {
-			System.err.println("Expecting an argument to -s!");
-			System.exit(1);
+			bailOut("Expecting an argument to -s!");
 		    }
-		} else if (args[i].equals("-b")) {
+		    } else if ("-b".equals(args[i])) {
 		    ++i;
 		    if (i < args.length) {
 			try {
 			    BOARD_SIZE = Integer.parseInt(args[i]);
 			} catch (NumberFormatException ex) {
-			    System.err.println("Invalid board size!");
-			    System.exit(1);
+			    bailOut("Invalid board size!");
 			}
 			if (BOARD_SIZE < MIN_BOARD_SIZE) {
-			    System.err.println("Board size too small!");
-			    System.exit(1);
+			    bailOut("Board size too small!");
 			}
 		    } else {
-			System.err.println("Expecting an argument to -b!");
-			System.exit(1);
+			bailOut("Expecting an argument to -b!");
 		    }
 		} else {
 		    break;
@@ -188,8 +189,7 @@ public class PctLife extends JFrame implements ActionListener {
 		if (fin.exists()) {
 		    new PctLife(fin);
 		} else {
-		    System.err.println("File " + fin + " does not exist!");
-		    System.exit(1);
+		    bailOut("File " + fin + " does not exist!");
 		}
 	    } else {
 		new PctLife();

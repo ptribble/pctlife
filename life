@@ -24,7 +24,7 @@ case $1 in
 	;;
 '-pmd')
 	PMDRULES="basic braces clone empty finalizers imports migrating strictexception strings sunsecure typeresolution unnecessary unusedcode"
-	PMDCATRULES="security"
+	PMDCATRULES="security bestpractices"
 	RULESETS=""
 	for RULE in $PMDRULES
 	do
