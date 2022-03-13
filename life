@@ -1,18 +1,18 @@
 #!/bin/sh
 case $1 in
-'-build')
+build|-build)
 	javac -Xlint -Xlint:-serial uk/co/petertribble/life/*.java
 	jar -cmf life.manifest life.jar uk/co/petertribble/life/*.class pixmaps/pctlife.png
 	rm uk/co/petertribble/life/*.class
 	exit 0
 	;;
-'-javadoc')
+javadoc|-javadoc)
 	rm -fr javadoc
 	mkdir javadoc
 	javadoc -Xdoclint:all -d javadoc uk.co.petertribble.life
 	exit 0
 	;;
-'-package')
+package|-package)
 	./pkg/mkproto > pp
 	pkgmk -d /tmp -f pp -r `pwd` TRIBpctlife
 	pkgtrans -s /tmp /tmp/TRIBpctlife.pkg TRIBpctlife
@@ -28,11 +28,12 @@ case $1 in
 	rm -fr /tmp/TRIBpctlife
 	exit 0
 	;;
-'-pmd')
+pmd|-pmd)
 	PMDRULES="basic braces clone empty finalizers imports migrating strictexception strings sunsecure typeresolution unnecessary unusedcode"
 	PMDCATRULES="security bestpractices multithreading"
 	RULESETS=""
-	for RULE in $PMDRULES
+	shift
+	for RULE in $PMDRULES $*
 	do
 	    RULESETS="${RULESETS},rulesets/java/${RULE}.xml"
 	done
