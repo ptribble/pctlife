@@ -22,10 +22,10 @@
 
 package uk.co.petertribble.life;
 
+import java.awt.event.*;
 import javax.swing.JColorChooser;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
-import java.awt.event.*;
 
 /**
  * A menu to allow colors to be chosen.

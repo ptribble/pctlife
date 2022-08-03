@@ -22,18 +22,18 @@
 
 package uk.co.petertribble.life;
 
-import javax.swing.JPanel;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Dimension;
 import java.awt.Color;
-import java.awt.geom.Rectangle2D;
-import java.io.File;
-import java.io.IOException;
-import java.io.FileReader;
-import java.io.BufferedReader;
-import javax.swing.Timer;
+import java.awt.Dimension;
+import java.awt.Graphics2D;
+import java.awt.Graphics;
 import java.awt.event.*;
+import java.awt.geom.Rectangle2D;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import javax.swing.JPanel;
+import javax.swing.Timer;
 
 /**
  * The main board for pctlife.

@@ -22,13 +22,13 @@
 
 package uk.co.petertribble.life;
 
+import java.awt.event.*;
+import java.io.File;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import java.awt.event.*;
-import java.io.File;
 
 /**
  * The main driver frame for PctLife.

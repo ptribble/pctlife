@@ -22,10 +22,10 @@
 
 package uk.co.petertribble.life;
 
+import java.awt.event.*;
 import javax.swing.ButtonGroup;
 import javax.swing.JMenu;
 import javax.swing.JRadioButtonMenuItem;
-import java.awt.event.*;
 
 /**
  * A menu to allow game speed to be selected.
