@@ -46,4 +46,8 @@ pmd|-pmd)
 	exit 0
 	;;
 esac
+# Flags:
+# -b board size (default 128)
+# -g cell gap (default 1)
+# -s cell size (default 5)
 exec java -jar life.jar $*

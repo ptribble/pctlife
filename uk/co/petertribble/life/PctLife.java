@@ -59,9 +59,17 @@ public class PctLife extends JFrame implements ActionListener {
      */
     private static final int DEFAULT_CELL_SIZE = 5;
     /**
+     * The default gap between cells, in pixels.
+     */
+    private static final int DEFAULT_CELL_GAP = 1;
+    /**
      * The minimum size, in pixels, of each cell.
      */
     private static final int MIN_CELL_SIZE = 1;
+    /**
+     * The maximum gap between cells, in pixels.
+     */
+    private static final int MAX_CELL_GAP = 3;
 
     /**
      * Menu button to exit the application.
@@ -78,6 +86,7 @@ public class PctLife extends JFrame implements ActionListener {
 
     private static int BOARD_SIZE = DEFAULT_BOARD_SIZE;
     private static int CELL_SIZE = DEFAULT_CELL_SIZE;
+    private static int CELL_GAP = DEFAULT_CELL_GAP;
 
     /**
      * Construct a new PctLife instance, starting with a random pattern.
@@ -94,7 +103,7 @@ public class PctLife extends JFrame implements ActionListener {
      */
     public PctLife(File f) {
 	super("PctLife");
-	board = new PctBoard(BOARD_SIZE, CELL_SIZE);
+	board = new PctBoard(BOARD_SIZE, CELL_SIZE, CELL_GAP);
 
 	addWindowListener(new winExit());
 
@@ -157,7 +166,10 @@ public class PctLife extends JFrame implements ActionListener {
     }
 
     /**
-     * Create a new Life game.
+     * Create a new Life game. The supported flags are:
+     * -b The board size
+     * -g The gap between cells
+     * -s The size of each cell
      *
      * @param args command line arguments
      */
@@ -179,7 +191,7 @@ public class PctLife extends JFrame implements ActionListener {
 		    } else {
 			bailOut("Expecting an argument to -s!");
 		    }
-		    } else if ("-b".equals(args[i])) {
+		} else if ("-b".equals(args[i])) {
 		    ++i;
 		    if (i < args.length) {
 			try {
@@ -192,6 +204,23 @@ public class PctLife extends JFrame implements ActionListener {
 			}
 		    } else {
 			bailOut("Expecting an argument to -b!");
+		    }
+		} else if ("-g".equals(args[i])) {
+		    ++i;
+		    if (i < args.length) {
+			try {
+			    CELL_GAP = Integer.parseInt(args[i]);
+			} catch (NumberFormatException ex) {
+			    bailOut("Invalid call gap!");
+			}
+			if (CELL_GAP < 0) {
+			    bailOut("Cell gap too small!");
+			}
+			if (CELL_GAP > MAX_CELL_GAP) {
+			    bailOut("Cell gap too large!");
+			}
+		    } else {
+			bailOut("Expecting an argument to -g!");
 		    }
 		} else {
 		    break;

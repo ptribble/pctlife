@@ -53,6 +53,8 @@ public class PctBoard extends JPanel implements ActionListener {
     private final int BOARD_MID;
     /** The current cell size in pixels. */
     private final int CELL_SIZE;
+    /** The gap left between cells as a double. */
+    private final double DCELL_GAP;
 
     /**
      * A Timer, to update the model in a loop.
@@ -77,18 +79,20 @@ public class PctBoard extends JPanel implements ActionListener {
      *
      * @param BOARD_SIZE the size of the board
      * @param CELL_SIZE the size of each cell
+     * @param CELL_GAP the gap left between cells
      */
-    public PctBoard(int BOARD_SIZE, int CELL_SIZE) {
+    public PctBoard(int BOARD_SIZE, int CELL_SIZE, int CELL_GAP) {
 	this.BOARD_SIZE = BOARD_SIZE;
 	this.CELL_SIZE = CELL_SIZE;
 	BOARD_MID = BOARD_SIZE/2;
+	DCELL_GAP = (double) CELL_GAP;
 
 	oldgen = new int[BOARD_SIZE+2][BOARD_SIZE+2];
 	newgen = new int[BOARD_SIZE+2][BOARD_SIZE+2];
 	labels = new boolean[BOARD_SIZE][BOARD_SIZE];
 
-	Dimension dboard = new Dimension(BOARD_SIZE*(CELL_SIZE+1),
-					BOARD_SIZE*(CELL_SIZE+1));
+	Dimension dboard = new Dimension(BOARD_SIZE*(CELL_SIZE+CELL_GAP),
+					BOARD_SIZE*(CELL_SIZE+CELL_GAP));
 	setSize(dboard);
 	setMinimumSize(dboard);
 	setPreferredSize(dboard);
@@ -353,8 +357,8 @@ public class PctBoard extends JPanel implements ActionListener {
 	g2.setPaint(livecolor);
 	double dw = d.width/((double) BOARD_SIZE);
 	double dh = d.height/((double) BOARD_SIZE);
-	double ddw = ((double) CELL_SIZE)*dw/(((double) CELL_SIZE) + 1.0d);
-	double ddh = ((double) CELL_SIZE)*dh/(((double) CELL_SIZE) + 1.0d);
+	double ddw = ((double) CELL_SIZE)*dw/(((double) CELL_SIZE) + DCELL_GAP);
+	double ddh = ((double) CELL_SIZE)*dh/(((double) CELL_SIZE) + DCELL_GAP);
 	for (int i = 0; i < BOARD_SIZE; i++) {
 	    for (int j = 0; j < BOARD_SIZE; j++) {
 		if (labels[i][j]) {
