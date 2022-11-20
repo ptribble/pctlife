@@ -70,7 +70,7 @@ public class PctBoard extends JPanel implements ActionListener {
      */
     private int[][] newgen;
     /**
-     * An array of boolean[] to record the liveness of a cell..
+     * An array of boolean[] to record the liveness of a cell.
      */
     private boolean[][] labels;
 
