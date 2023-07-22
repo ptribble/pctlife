@@ -42,7 +42,10 @@ pmd|-pmd)
 	    RULESETS="${RULESETS},category/java/${RULE}.xml"
 	done
 	RULESETS=`echo $RULESETS|sed s:,::`
-	pmd -d uk -R $RULESETS -version 1.8 -auxclasspath `echo lib/java/* | sed 's= =:=g'` 2>/dev/null
+	if [ ! -d ${HOME}/.pmd ]; then
+	    mkdir -p ${HOME}/.pmd
+	fi
+	pmd check --cache ${HOME}/.pmd/cache.pctlife -d uk -R $RULESETS --use-version java-1.8 --aux-classpath `echo lib/java/* | sed 's= =:=g'` 2>/dev/null
 	exit 0
 	;;
 esac
