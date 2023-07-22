@@ -368,6 +368,7 @@ public class PctBoard extends JPanel implements ActionListener {
 	}
     }
 
+    @Override
     public void actionPerformed(ActionEvent e) {
 	step();
     }

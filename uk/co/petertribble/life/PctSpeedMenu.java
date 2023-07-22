@@ -85,6 +85,7 @@ public class PctSpeedMenu extends JMenu implements ActionListener {
 	bgroup.add(insaneSpeed);
     }
 
+    @Override
     public void actionPerformed(ActionEvent e) {
 	if (e.getSource() == slowSpeed) {
 	    board.setDelay(2*PctLife.INTERVAL);

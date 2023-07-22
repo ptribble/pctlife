@@ -58,6 +58,7 @@ public class PctColorMenu extends JMenu implements ActionListener {
 	add(bgItem);
     }
 
+    @Override
     public void actionPerformed(ActionEvent e) {
 	if (e.getSource() == fgItem) {
 	    board.setfg(JColorChooser.showDialog(this,
