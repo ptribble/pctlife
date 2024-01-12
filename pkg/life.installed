@@ -1,2 +1,2 @@
 #!/bin/sh
-exec java -jar /usr/share/pctlife/life.jar $*
+exec java -jar /usr/share/pctlife/life.jar "$@"

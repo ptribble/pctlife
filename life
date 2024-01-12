@@ -17,7 +17,7 @@ package|-package)
 	pkgmk -d /tmp -f pp -r `pwd` TRIBpctlife
 	pkgtrans -s /tmp /tmp/TRIBpctlife.pkg TRIBpctlife
 	rm pp
-	cd /tmp
+	cd /tmp || exit 1
 	if [ -x ${THOME}/build/create_zap_from_pkg ]; then
 	    ${THOME}/build/create_zap_from_pkg TRIBpctlife /tmp/TRIBpctlife.pkg
 	else
@@ -33,7 +33,7 @@ pmd|-pmd)
 	PMDCATRULES="security bestpractices multithreading"
 	RULESETS=""
 	shift
-	for RULE in $PMDRULES $*
+	for RULE in $PMDRULES "$@"
 	do
 	    RULESETS="${RULESETS},rulesets/java/${RULE}.xml"
 	done
@@ -53,4 +53,4 @@ esac
 # -b board size (default 128)
 # -g cell gap (default 1)
 # -s cell size (default 5)
-exec java -jar life.jar $*
+exec java -jar life.jar "$@"
