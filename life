@@ -1,4 +1,7 @@
 #!/bin/sh
+#
+# SPDX-License-Identifier: CDDL-1.0
+#
 case $1 in
 build|-build)
 	javac -Xlint -Xlint:-serial uk/co/petertribble/life/*.java
@@ -29,15 +32,10 @@ package|-package)
 	exit 0
 	;;
 pmd|-pmd)
-	PMDRULES="basic braces clone empty finalizers imports migrating strictexception strings sunsecure typeresolution unnecessary unusedcode"
 	PMDCATRULES="security bestpractices multithreading"
 	RULESETS=""
 	shift
-	for RULE in $PMDRULES "$@"
-	do
-	    RULESETS="${RULESETS},rulesets/java/${RULE}.xml"
-	done
-	for RULE in $PMDCATRULES
+	for RULE in $PMDCATRULES "$@"
 	do
 	    RULESETS="${RULESETS},category/java/${RULE}.xml"
 	done
