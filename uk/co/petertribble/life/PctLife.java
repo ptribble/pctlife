@@ -33,7 +33,9 @@ import javax.swing.JMenuItem;
 /**
  * The main driver frame for PctLife.
  */
-public class PctLife extends JFrame implements ActionListener {
+public final class PctLife extends JFrame implements ActionListener {
+
+    private static final long serialVersionUID = 1L;
 
     /** The board to be shown. */
     private PctBoard board;

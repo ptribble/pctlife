@@ -30,7 +30,9 @@ import javax.swing.JMenuItem;
 /**
  * A menu to allow colors to be chosen.
  */
-public class PctColorMenu extends JMenu implements ActionListener {
+public final class PctColorMenu extends JMenu implements ActionListener {
+
+    private static final long serialVersionUID = 1L;
 
     /** The board to apply the color change to. */
     private final PctBoard board;

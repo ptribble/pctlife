@@ -30,7 +30,9 @@ import javax.swing.JRadioButtonMenuItem;
 /**
  * A menu to allow game speed to be selected.
  */
-public class PctSpeedMenu extends JMenu implements ActionListener {
+public final class PctSpeedMenu extends JMenu implements ActionListener {
+
+    private static final long serialVersionUID = 1L;
 
     /** The board to apply the speed change to. */
     private final PctBoard board;

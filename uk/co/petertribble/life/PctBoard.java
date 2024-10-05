@@ -38,7 +38,9 @@ import javax.swing.Timer;
 /**
  * The main board for pctlife.
  */
-public class PctBoard extends JPanel implements ActionListener {
+public final class PctBoard extends JPanel implements ActionListener {
+
+    private static final long serialVersionUID = 1L;
 
     /*
      * The initial filling factor.
