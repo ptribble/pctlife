@@ -49,7 +49,7 @@ public final class PctLife extends JFrame implements ActionListener {
      * The default size in cells of the life board. This is the visible size,
      * there will always be an invisible 1-cell strip around the border.
      */
-    private static final int DEFAULT_BOARD_SIZE = 128;
+    private static final int DEF_BOARD_SIZE = 128;
     /**
      * The minimum size in cells of the life board. This is the visible size,
      * there will always be an invisible 1-cell strip around the border.
@@ -59,11 +59,11 @@ public final class PctLife extends JFrame implements ActionListener {
     /**
      * The default size, in pixels, of each cell.
      */
-    private static final int DEFAULT_CELL_SIZE = 5;
+    private static final int DEF_CELL_SIZE = 5;
     /**
      * The default gap between cells, in pixels.
      */
-    private static final int DEFAULT_CELL_GAP = 1;
+    private static final int DEF_CELL_GAP = 1;
     /**
      * The minimum size, in pixels, of each cell.
      */
@@ -86,9 +86,9 @@ public final class PctLife extends JFrame implements ActionListener {
      */
     private JMenuItem stopItem;
 
-    private static int BOARD_SIZE = DEFAULT_BOARD_SIZE;
-    private static int CELL_SIZE = DEFAULT_CELL_SIZE;
-    private static int CELL_GAP = DEFAULT_CELL_GAP;
+    private static int boardSize = DEF_BOARD_SIZE;
+    private static int cellSize = DEF_CELL_SIZE;
+    private static int cellGap = DEF_CELL_GAP;
 
     /**
      * Construct a new PctLife instance, starting with a random pattern.
@@ -101,18 +101,18 @@ public final class PctLife extends JFrame implements ActionListener {
      * Construct a new PctLife instance. If a file is supplied, it will be
      * loaded, else a random pattern will start the game.
      *
-     * @param f the file to load the initial pattern from
+     * @param infile the file to load the initial pattern from
      */
-    public PctLife(File f) {
+    public PctLife(final File infile) {
 	super("PctLife");
-	board = new PctBoard(BOARD_SIZE, CELL_SIZE, CELL_GAP);
+	board = new PctBoard(boardSize, cellSize, cellGap);
 
 	addWindowListener(new winExit());
 
 	setContentPane(board);
 
 	// FIXME add Load item
-	JMenu jmf = new JMenu("File");
+	final JMenu jmf = new JMenu("File");
 	jmf.setMnemonic(KeyEvent.VK_F);
 	newItem = new JMenuItem("New", KeyEvent.VK_N);
 	newItem.addActionListener(this);
@@ -125,20 +125,20 @@ public final class PctLife extends JFrame implements ActionListener {
 	jmf.addSeparator();
 	jmf.add(exitItem);
 
-	JMenuBar jm = new JMenuBar();
-	jm.add(jmf);
-	jm.add(new PctColorMenu(board));
-	jm.add(new PctSpeedMenu(board));
-	setJMenuBar(jm);
+	final JMenuBar jmb = new JMenuBar();
+	jmb.add(jmf);
+	jmb.add(new PctColorMenu(board));
+	jmb.add(new PctSpeedMenu(board));
+	setJMenuBar(jmb);
 
 	setIconImage(new ImageIcon(this.getClass().getClassLoader().
 			getResource("pixmaps/pctlife.png")).getImage());
 
 	pack();
-	if (f == null) {
+	if (infile == null) {
 	    board.randomize();
 	} else {
-	    if (!board.loadPattern(f)) {
+	    if (!board.loadPattern(infile)) {
 		bailOut("Failed to load pattern");
 	    }
 	}
@@ -148,23 +148,23 @@ public final class PctLife extends JFrame implements ActionListener {
 
     class winExit extends WindowAdapter {
 	@Override
-	public void windowClosing(WindowEvent we) {
+	public void windowClosing(WindowEvent wev) {
 	    System.exit(0);
 	}
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
-	if (e.getSource() == newItem) {
+    public void actionPerformed(final ActionEvent aev) {
+	if (aev.getSource() == newItem) {
 	    board.randomize();
-	} else if (e.getSource() == stopItem) {
+	} else if (aev.getSource() == stopItem) {
 	    board.stopstart();
-	} else if (e.getSource() == exitItem) {
+	} else if (aev.getSource() == exitItem) {
 	    System.exit(0);
 	}
     }
 
-    private static void bailOut(String msg) {
+    private static void bailOut(final String msg) {
 	System.err.println(msg); //NOPMD
 	System.exit(1);
     }
@@ -177,19 +177,19 @@ public final class PctLife extends JFrame implements ActionListener {
      *
      * @param args command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
 	if (args.length > 0) {
-	    int i = 0;
+	    int i = 0; //NOPMD
 	    while (i < args.length) {
 		if ("-s".equals(args[i])) {
 		    ++i;
 		    if (i < args.length) {
 			try {
-			    CELL_SIZE = Integer.parseInt(args[i]);
+			    cellSize = Integer.parseInt(args[i]);
 			} catch (NumberFormatException ex) {
 			    bailOut("Invalid cell size!");
 			}
-			if (CELL_SIZE < MIN_CELL_SIZE) {
+			if (cellSize < MIN_CELL_SIZE) {
 			    bailOut("Cell size too small!");
 			}
 		    } else {
@@ -199,11 +199,11 @@ public final class PctLife extends JFrame implements ActionListener {
 		    ++i;
 		    if (i < args.length) {
 			try {
-			    BOARD_SIZE = Integer.parseInt(args[i]);
+			    boardSize = Integer.parseInt(args[i]);
 			} catch (NumberFormatException ex) {
 			    bailOut("Invalid board size!");
 			}
-			if (BOARD_SIZE < MIN_BOARD_SIZE) {
+			if (boardSize < MIN_BOARD_SIZE) {
 			    bailOut("Board size too small!");
 			}
 		    } else {
@@ -213,14 +213,14 @@ public final class PctLife extends JFrame implements ActionListener {
 		    ++i;
 		    if (i < args.length) {
 			try {
-			    CELL_GAP = Integer.parseInt(args[i]);
+			    cellGap = Integer.parseInt(args[i]);
 			} catch (NumberFormatException ex) {
 			    bailOut("Invalid call gap!");
 			}
-			if (CELL_GAP < 0) {
+			if (cellGap < 0) {
 			    bailOut("Cell gap too small!");
 			}
-			if (CELL_GAP > MAX_CELL_GAP) {
+			if (cellGap > MAX_CELL_GAP) {
 			    bailOut("Cell gap too large!");
 			}
 		    } else {
@@ -232,7 +232,7 @@ public final class PctLife extends JFrame implements ActionListener {
 		++i;
 	    }
 	    if (i < args.length) {
-		File fin = new File(args[i]);
+		final File fin = new File(args[i]);
 		if (fin.exists()) {
 		    new PctLife(fin);
 		} else {

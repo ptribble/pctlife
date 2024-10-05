@@ -50,13 +50,13 @@ public final class PctBoard extends JPanel implements ActionListener {
     private static Color deadcolor = Color.black;
 
     /** The current size in cells of the board. */
-    private final int BOARD_SIZE;
+    private final int boardSize;
     /** The current size in cells of the middle of the board. */
-    private final int BOARD_MID;
+    private final int boardMid;
     /** The current cell size in pixels. */
-    private final int CELL_SIZE;
+    private final int cellSize;
     /** The gap left between cells as a double. */
-    private final double DCELL_GAP;
+    private final double dCellGap;
 
     /**
      * A Timer, to update the model in a loop.
@@ -79,22 +79,22 @@ public final class PctBoard extends JPanel implements ActionListener {
     /**
      * Construct a new PctBoard instance of the given size.
      *
-     * @param BOARD_SIZE the size of the board
-     * @param CELL_SIZE the size of each cell
-     * @param CELL_GAP the gap left between cells
+     * @param boardSize the size of the board
+     * @param cellSize the size of each cell
+     * @param cellGap the gap left between cells
      */
-    public PctBoard(int BOARD_SIZE, int CELL_SIZE, int CELL_GAP) {
-	this.BOARD_SIZE = BOARD_SIZE;
-	this.CELL_SIZE = CELL_SIZE;
-	BOARD_MID = BOARD_SIZE/2;
-	DCELL_GAP = (double) CELL_GAP;
+    public PctBoard(final int boardSize, final int cellSize, final int cellGap) {
+	this.boardSize = boardSize;
+	this.cellSize = cellSize;
+	boardMid = boardSize/2;
+	dCellGap = cellGap;
 
-	oldgen = new int[BOARD_SIZE+2][BOARD_SIZE+2];
-	newgen = new int[BOARD_SIZE+2][BOARD_SIZE+2];
-	labels = new boolean[BOARD_SIZE][BOARD_SIZE];
+	oldgen = new int[boardSize+2][boardSize+2];
+	newgen = new int[boardSize+2][boardSize+2];
+	labels = new boolean[boardSize][boardSize];
 
-	Dimension dboard = new Dimension(BOARD_SIZE*(CELL_SIZE+CELL_GAP),
-					BOARD_SIZE*(CELL_SIZE+CELL_GAP));
+	final Dimension dboard = new Dimension(boardSize*(cellSize+cellGap),
+					boardSize*(cellSize+cellGap));
 	setSize(dboard);
 	setMinimumSize(dboard);
 	setPreferredSize(dboard);
@@ -105,8 +105,8 @@ public final class PctBoard extends JPanel implements ActionListener {
      * Populate the board with random data.
      */
     public void randomize() {
-	for (int i = 0; i < BOARD_SIZE; i++) {
-	    for (int j = 0; j < BOARD_SIZE; j++) {
+	for (int i = 0; i < boardSize; i++) {
+	    for (int j = 0; j < boardSize; j++) {
 		oldgen[i+1][j+1] = Math.random() < FILL_FACTOR ? 1 : 0;
 		labels[i][j] = oldgen[i+1][j+1] == 1;
 	    }
@@ -115,13 +115,13 @@ public final class PctBoard extends JPanel implements ActionListener {
     }
 
     private void blank() {
-	for (int i = 0; i < BOARD_SIZE+2; i++) {
-	    for (int j = 0; j < BOARD_SIZE+2; j++) {
+	for (int i = 0; i < boardSize+2; i++) {
+	    for (int j = 0; j < boardSize+2; j++) {
 		oldgen[i][j] = 0;
 	    }
 	}
-	for (int i = 0; i < BOARD_SIZE; i++) {
-	    for (int j = 0; j < BOARD_SIZE; j++) {
+	for (int i = 0; i < boardSize; i++) {
+	    for (int j = 0; j < boardSize; j++) {
 		labels[i][j] = false;
 	    }
 	}
@@ -131,19 +131,19 @@ public final class PctBoard extends JPanel implements ActionListener {
      * Import a life pattern. If there's a problem, return false and the board
      * will be left in an indeterminate state.
      *
-     * @param f the File to read in
+     * @param infile the File to read in
      *
      * @return false in the event of a problem
      */
-    public boolean loadPattern(File f) {
+    public boolean loadPattern(final File infile) {
 	blank();
-	if (!f.exists()) {
+	if (!infile.exists()) {
 	    return false;
 	}
 	int x = 0;
 	int xblock = 0;
 	int y = 0;
-	try (BufferedReader input =  new BufferedReader(new FileReader(f))) {
+	try (BufferedReader input =  new BufferedReader(new FileReader(infile))) {
 	    String line;
 	    try {
 		line = input.readLine();
@@ -152,11 +152,11 @@ public final class PctBoard extends JPanel implements ActionListener {
 		}
 		while ((line = input.readLine()) != null) {
 		    if (line.startsWith("#P")) {
-			String[] ds = line.split("\\s+", 3);
+			final String[] ds = line.split("\\s+", 3);
 			try {
-			    x = BOARD_MID + Integer.parseInt(ds[1]);
+			    x = boardMid + Integer.parseInt(ds[1]);
 			    xblock = x;
-			    y = BOARD_MID + Integer.parseInt(ds[2]);
+			    y = boardMid + Integer.parseInt(ds[2]);
 			} catch (NumberFormatException nfe) {
 			    return false;
 			}
@@ -166,7 +166,7 @@ public final class PctBoard extends JPanel implements ActionListener {
 		    } else {
 			// read the pattern and populate the board
 			for (int i = 0; i < line.length(); i++) {
-			    char c = line.charAt(i);
+			    final char c = line.charAt(i);
 			    if (c == '.') {
 				x++;
 			    } else if (c == '*') {
@@ -189,9 +189,9 @@ public final class PctBoard extends JPanel implements ActionListener {
 	return true;
     }
 
-    private void setAlive(int i, int j) {
-	oldgen[i+1][j+1] = 1;
-	labels[i][j] = true;
+    private void setAlive(final int iii, final int jjj) {
+	oldgen[iii+1][jjj+1] = 1;
+	labels[iii][jjj] = true;
     }
 
     /**
@@ -200,8 +200,8 @@ public final class PctBoard extends JPanel implements ActionListener {
      * Essentially, just add up the values of the neighbouring cells.
      */
     public void step() {
-	for (int i = 0; i < BOARD_SIZE; i++) {
-	    for (int j = 0; j < BOARD_SIZE; j++) {
+	for (int i = 0; i < boardSize; i++) {
+	    for (int j = 0; j < boardSize; j++) {
 		newgen[i+1][j+1] = oldgen[i][j]
 		    + oldgen[i+1][j]
 		    + oldgen[i+2][j]
@@ -213,42 +213,42 @@ public final class PctBoard extends JPanel implements ActionListener {
 	    }
 	}
 	// do edges
-	for (int i = 0; i < BOARD_SIZE; i++) {
+	for (int i = 0; i < boardSize; i++) {
 	    newgen[i+1][0] = oldgen[i][0]
 		    + oldgen[i+2][0]
 		    + oldgen[i][1]
 		    + oldgen[i+1][1]
 		    + oldgen[i+2][1];
-	    newgen[i+1][BOARD_SIZE+1] = oldgen[i][BOARD_SIZE+1]
-		    + oldgen[i+2][BOARD_SIZE+1]
-		    + oldgen[i][BOARD_SIZE]
-		    + oldgen[i+1][BOARD_SIZE]
-		    + oldgen[i+2][BOARD_SIZE];
+	    newgen[i+1][boardSize+1] = oldgen[i][boardSize+1]
+		    + oldgen[i+2][boardSize+1]
+		    + oldgen[i][boardSize]
+		    + oldgen[i+1][boardSize]
+		    + oldgen[i+2][boardSize];
 	}
-	for (int j = 0; j < BOARD_SIZE; j++) {
+	for (int j = 0; j < boardSize; j++) {
 		newgen[0][j+1] = oldgen[0][j]
 		    + oldgen[0][j+2]
 		    + oldgen[1][j]
 		    + oldgen[1][j+1]
 		    + oldgen[1][j+2];
-		newgen[BOARD_SIZE+1][j+1] = oldgen[BOARD_SIZE+1][j]
-		    + oldgen[BOARD_SIZE+1][j+2]
-		    + oldgen[BOARD_SIZE][j]
-		    + oldgen[BOARD_SIZE][j+1]
-		    + oldgen[BOARD_SIZE][j+2];
+		newgen[boardSize+1][j+1] = oldgen[boardSize+1][j]
+		    + oldgen[boardSize+1][j+2]
+		    + oldgen[boardSize][j]
+		    + oldgen[boardSize][j+1]
+		    + oldgen[boardSize][j+2];
 	}
 	// end edges
 	// do corners
 	newgen[0][0] = oldgen[0][1] + oldgen[1][1] + oldgen[1][0];
-	newgen[0][BOARD_SIZE+1] = oldgen[0][BOARD_SIZE] + oldgen[1][BOARD_SIZE]
-	    + oldgen[1][BOARD_SIZE+1];
-	newgen[BOARD_SIZE+1][0] = oldgen[BOARD_SIZE][0] + oldgen[BOARD_SIZE][1]
-	    + oldgen[BOARD_SIZE+1][1];
-	newgen[BOARD_SIZE+1][BOARD_SIZE+1] = oldgen[BOARD_SIZE][BOARD_SIZE+1]
-	    + oldgen[BOARD_SIZE+1][BOARD_SIZE] + oldgen[BOARD_SIZE][BOARD_SIZE];
+	newgen[0][boardSize+1] = oldgen[0][boardSize] + oldgen[1][boardSize]
+	    + oldgen[1][boardSize+1];
+	newgen[boardSize+1][0] = oldgen[boardSize][0] + oldgen[boardSize][1]
+	    + oldgen[boardSize+1][1];
+	newgen[boardSize+1][boardSize+1] = oldgen[boardSize][boardSize+1]
+	    + oldgen[boardSize+1][boardSize] + oldgen[boardSize][boardSize];
 	// end corners
-	for (int i = 0; i < BOARD_SIZE+2; i++) {
-	    for (int j = 0; j < BOARD_SIZE+2; j++) {
+	for (int i = 0; i < boardSize+2; i++) {
+	    for (int j = 0; j < boardSize+2; j++) {
 		if (oldgen[i][j] == 1) {
 		    oldgen[i][j] = isAlive(newgen[i][j]) ? 1 : 0;
 		} else {
@@ -256,8 +256,8 @@ public final class PctBoard extends JPanel implements ActionListener {
 		}
 	    }
 	}
-	for (int i = 0; i < BOARD_SIZE; i++) {
-	    for (int j = 0; j < BOARD_SIZE; j++) {
+	for (int i = 0; i < boardSize; i++) {
+	    for (int j = 0; j < boardSize; j++) {
 		labels[i][j] = oldgen[i+1][j+1] == 1;
 	    }
 	}
@@ -268,12 +268,12 @@ public final class PctBoard extends JPanel implements ActionListener {
      * isAlive() and isBorn() are abstracted to allow extension to universes
      * with different rules.
      */
-    private boolean isAlive(int i) {
-	return i == 2 || i == 3;
+    private boolean isAlive(final int inear) {
+	return inear == 2 || inear == 3;
     }
 
-    private boolean isBorn(int i) {
-	return i == 3;
+    private boolean isBorn(final int inear) {
+	return inear == 3;
     }
 
     /**
@@ -290,7 +290,7 @@ public final class PctBoard extends JPanel implements ActionListener {
      *
      * @param newColor The new foreground color.
      */
-    public void setfg(Color newColor) {
+    public void setfg(final Color newColor) {
 	if (newColor != null) {
 	    livecolor = newColor;
 	}
@@ -310,7 +310,7 @@ public final class PctBoard extends JPanel implements ActionListener {
      *
      * @param newColor The new background color.
      */
-    public void setbg(Color newColor) {
+    public void setbg(final Color newColor) {
 	if (newColor != null) {
 	    deadcolor = newColor;
 	}
@@ -342,36 +342,36 @@ public final class PctBoard extends JPanel implements ActionListener {
     /**
      * Set the delay between steps in the game.
      *
-     * @param i the desired delay in milliseconds.
+     * @param idelay the desired delay in milliseconds.
      */
-    public void setDelay(int i) {
+    public void setDelay(final int idelay) {
 	if (timer != null) {
-	    timer.setDelay(i);
+	    timer.setDelay(idelay);
 	}
     }
 
     @Override
-    public void paint(Graphics g) {
-	Graphics2D g2 = (Graphics2D) g;
-	Dimension d = getSize();
-	g2.setPaint(deadcolor);
-	g2.fill(new Rectangle2D.Double(0.0d, 0.0d, d.width, d.height));
-	g2.setPaint(livecolor);
-	double dw = d.width/((double) BOARD_SIZE);
-	double dh = d.height/((double) BOARD_SIZE);
-	double ddw = ((double) CELL_SIZE)*dw/(((double) CELL_SIZE) + DCELL_GAP);
-	double ddh = ((double) CELL_SIZE)*dh/(((double) CELL_SIZE) + DCELL_GAP);
-	for (int i = 0; i < BOARD_SIZE; i++) {
-	    for (int j = 0; j < BOARD_SIZE; j++) {
+    public void paint(final Graphics g) {
+	final Graphics2D gr2 = (Graphics2D) g;
+	final Dimension d = getSize();
+	gr2.setPaint(deadcolor);
+	gr2.fill(new Rectangle2D.Double(0.0d, 0.0d, d.width, d.height));
+	gr2.setPaint(livecolor);
+	final double dww = d.width/((double) boardSize);
+	final double dhh = d.height/((double) boardSize);
+	final double ddw = cellSize*dww/(cellSize + dCellGap);
+	final double ddh = cellSize*dhh/(cellSize + dCellGap);
+	for (int i = 0; i < boardSize; i++) {
+	    for (int j = 0; j < boardSize; j++) {
 		if (labels[i][j]) {
-		    g2.fill(new Rectangle2D.Double(dw*i, dh*j, ddw, ddh));
+		    gr2.fill(new Rectangle2D.Double(dww*i, dhh*j, ddw, ddh));
 		}
 	    }
 	}
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
+    public void actionPerformed(ActionEvent aev) {
 	step();
     }
 }

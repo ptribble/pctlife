@@ -48,7 +48,7 @@ public final class PctColorMenu extends JMenu implements ActionListener {
      *
      * @param board the board to set the colors for
      */
-    public PctColorMenu(PctBoard board) {
+    public PctColorMenu(final PctBoard board) {
 	super("Colours");
 	this.board = board;
 	setMnemonic(KeyEvent.VK_C);
@@ -61,12 +61,12 @@ public final class PctColorMenu extends JMenu implements ActionListener {
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
-	if (e.getSource() == fgItem) {
+    public void actionPerformed(final ActionEvent aev) {
+	if (aev.getSource() == fgItem) {
 	    board.setfg(JColorChooser.showDialog(this,
 				"Choose cell colour",
 				PctBoard.getLiveColor()));
-	} else if (e.getSource() == bgItem) {
+	} else if (aev.getSource() == bgItem) {
 	    board.setbg(JColorChooser.showDialog(this,
 				"Choose background colour",
 				PctBoard.getDeadColor()));

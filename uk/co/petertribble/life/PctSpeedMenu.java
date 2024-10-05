@@ -53,7 +53,7 @@ public final class PctSpeedMenu extends JMenu implements ActionListener {
      *
      * @param board the board to set the speed for
      */
-    public PctSpeedMenu(PctBoard board) {
+    public PctSpeedMenu(final PctBoard board) {
 	super("Speed");
 	this.board = board;
 
@@ -79,7 +79,7 @@ public final class PctSpeedMenu extends JMenu implements ActionListener {
 	insaneSpeed.addActionListener(this);
 	add(insaneSpeed);
 
-	ButtonGroup bgroup = new ButtonGroup();
+	final ButtonGroup bgroup = new ButtonGroup();
 	bgroup.add(slowSpeed);
 	bgroup.add(normSpeed);
 	bgroup.add(fastSpeed);
@@ -88,16 +88,16 @@ public final class PctSpeedMenu extends JMenu implements ActionListener {
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
-	if (e.getSource() == slowSpeed) {
+    public void actionPerformed(final ActionEvent aev) {
+	if (aev.getSource() == slowSpeed) {
 	    board.setDelay(2*PctLife.INTERVAL);
-	} else if (e.getSource() == normSpeed) {
+	} else if (aev.getSource() == normSpeed) {
 	    board.setDelay(PctLife.INTERVAL);
-	} else if (e.getSource() == fastSpeed) {
+	} else if (aev.getSource() == fastSpeed) {
 	    board.setDelay(PctLife.INTERVAL/2);
-	} else if (e.getSource() == zoomSpeed) {
+	} else if (aev.getSource() == zoomSpeed) {
 	    board.setDelay(PctLife.INTERVAL/8);
-	} else if (e.getSource() == insaneSpeed) {
+	} else if (aev.getSource() == insaneSpeed) {
 	    board.setDelay(1);
 	}
     }
