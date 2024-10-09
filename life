@@ -27,12 +27,12 @@ javadoc|-javadoc)
 	;;
 package|-package)
 	./pkg/mkproto > pp
-	pkgmk -d /tmp -f pp -r `pwd` TRIBpctlife
+	pkgmk -d /tmp -f pp -r $(pwd) TRIBpctlife
 	pkgtrans -s /tmp /tmp/TRIBpctlife.pkg TRIBpctlife
 	rm pp
 	cd /tmp || exit 1
-	if [ -x ${THOME}/build/create_zap_from_pkg ]; then
-	    ${THOME}/build/create_zap_from_pkg TRIBpctlife /tmp/TRIBpctlife.pkg
+	if [ -x "${THOME}/build/create_zap_from_pkg" ]; then
+	    "${THOME}/build/create_zap_from_pkg" TRIBpctlife /tmp/TRIBpctlife.pkg
 	else
 	    zip -q -r TRIBpctlife TRIBpctlife
 	    mv TRIBpctlife.zip TRIBpctlife.zap
