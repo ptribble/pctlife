@@ -2,6 +2,16 @@
 #
 # SPDX-License-Identifier: CDDL-1.0
 #
+#
+# run
+# ./build pmd
+# to use this, you must have pmd in your path
+#
+# new PMD version 7 only has categories, configured in pmd-ruleset.xml
+#
+PMDRULES="./pmd-ruleset.xml"
+PMDCACHE="${HOME}/.pmd/cache.pctflie"
+
 case $1 in
 build|-build)
 	javac -Xlint -Xlint:-serial uk/co/petertribble/life/*.java
@@ -32,18 +42,10 @@ package|-package)
 	exit 0
 	;;
 pmd|-pmd)
-	PMDCATRULES="security bestpractices multithreading"
-	RULESETS=""
-	shift
-	for RULE in $PMDCATRULES "$@"
-	do
-	    RULESETS="${RULESETS},category/java/${RULE}.xml"
-	done
-	RULESETS=`echo $RULESETS|sed s:,::`
-	if [ ! -d ${HOME}/.pmd ]; then
-	    mkdir -p ${HOME}/.pmd
+	if [ ! -d "${HOME}/.pmd" ]; then
+	    mkdir -p "${HOME}/.pmd"
 	fi
-	pmd check --cache ${HOME}/.pmd/cache.pctlife -d uk -R $RULESETS --use-version java-1.8 --aux-classpath `echo lib/java/* | sed 's= =:=g'` 2>/dev/null
+	pmd check --cache "${PMDCACHE}" -d uk -R "${PMDRULES}" --use-version java-1.8 --aux-classpath $(echo lib/java/* | sed 's= =:=g') 2>/dev/null
 	exit 0
 	;;
 esac
