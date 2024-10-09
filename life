@@ -14,7 +14,7 @@ PMDCACHE="${HOME}/.pmd/cache.pctflie"
 
 case $1 in
 build|-build)
-	javac -Xlint -Xlint:-serial uk/co/petertribble/life/*.java
+	javac -Xlint uk/co/petertribble/life/*.java
 	jar -cmf life.manifest life.jar uk/co/petertribble/life/*.class pixmaps/pctlife.png
 	rm uk/co/petertribble/life/*.class
 	exit 0
