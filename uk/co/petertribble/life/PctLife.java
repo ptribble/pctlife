@@ -107,7 +107,7 @@ public final class PctLife extends JFrame implements ActionListener {
 	super("PctLife");
 	board = new PctBoard(boardSize, cellSize, cellGap);
 
-	addWindowListener(new winExit());
+	addWindowListener(new WindowExit());
 
 	setContentPane(board);
 
@@ -146,7 +146,7 @@ public final class PctLife extends JFrame implements ActionListener {
 	board.startLoop();
     }
 
-    class winExit extends WindowAdapter {
+    class WindowExit extends WindowAdapter {
 	@Override
 	public void windowClosing(WindowEvent wev) {
 	    System.exit(0);

@@ -12,7 +12,6 @@
     <rule ref="category/java/security.xml" />
     <rule ref="rulesets/java/quickstart.xml">
       <exclude name="CompareObjectsWithEquals"/>
-      <exclude name="ClassNamingConventions"/>
     </rule>
     <rule ref="category/java/performance.xml">
       <exclude name="AvoidInstantiatingObjectsInLoops"/>
