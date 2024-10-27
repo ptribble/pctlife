@@ -26,7 +26,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.Graphics;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.geom.Rectangle2D;
 import java.io.BufferedReader;
 import java.io.File;
@@ -42,11 +43,11 @@ public final class PctBoard extends JPanel implements ActionListener {
 
     private static final long serialVersionUID = 1L;
 
-    /*
-     * The initial filling factor.
-     */
+    /** The initial filling factor. */
     private static final double FILL_FACTOR = 0.15d;
+    /** The initial colour of live cells. */
     private static Color livecolor = Color.RED;
+    /** The initial colour of dead cells. */
     private static Color deadcolor = Color.black;
 
     /** The current size in cells of the board. */
@@ -79,13 +80,14 @@ public final class PctBoard extends JPanel implements ActionListener {
     /**
      * Construct a new PctBoard instance of the given size.
      *
-     * @param boardSize the size of the board
-     * @param cellSize the size of each cell
+     * @param nboardSize the size of the board
+     * @param ncellSize the size of each cell
      * @param cellGap the gap left between cells
      */
-    public PctBoard(final int boardSize, final int cellSize, final int cellGap) {
-	this.boardSize = boardSize;
-	this.cellSize = cellSize;
+    public PctBoard(final int nboardSize, final int ncellSize,
+		    final int cellGap) {
+	boardSize = nboardSize;
+	cellSize = ncellSize;
 	boardMid = boardSize/2;
 	dCellGap = cellGap;
 
@@ -143,7 +145,8 @@ public final class PctBoard extends JPanel implements ActionListener {
 	int x = 0;
 	int xblock = 0;
 	int y = 0;
-	try (BufferedReader input =  new BufferedReader(new FileReader(infile))) {
+	try (BufferedReader input =  new BufferedReader(
+						new FileReader(infile))) {
 	    String line;
 	    try {
 		line = input.readLine();
@@ -371,7 +374,7 @@ public final class PctBoard extends JPanel implements ActionListener {
     }
 
     @Override
-    public void actionPerformed(ActionEvent aev) {
+    public void actionPerformed(final ActionEvent aev) {
 	step();
     }
 }

@@ -22,7 +22,9 @@
 
 package uk.co.petertribble.life;
 
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import javax.swing.JColorChooser;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
@@ -46,11 +48,11 @@ public final class PctColorMenu extends JMenu implements ActionListener {
      * Create a menu to allow foreground and background colors to be
      * selected for the given board.
      *
-     * @param board the board to set the colors for
+     * @param nboard the board to set the colors for
      */
-    public PctColorMenu(final PctBoard board) {
+    public PctColorMenu(final PctBoard nboard) {
 	super("Colours");
-	this.board = board;
+	board = nboard;
 	setMnemonic(KeyEvent.VK_C);
 	fgItem = new JMenuItem("Foreground", KeyEvent.VK_F);
 	fgItem.addActionListener(this);

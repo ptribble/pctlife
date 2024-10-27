@@ -22,7 +22,11 @@
 
 package uk.co.petertribble.life;
 
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.File;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -85,9 +89,17 @@ public final class PctLife extends JFrame implements ActionListener {
      * Menu button to stop the current game.
      */
     private JMenuItem stopItem;
-
+    /**
+     * The size in cells of the life board.
+     */
     private static int boardSize = DEF_BOARD_SIZE;
+    /**
+     * The size, in pixels, of each cell.
+     */
     private static int cellSize = DEF_CELL_SIZE;
+    /**
+     * The gap between cells, in pixels.
+     */
     private static int cellGap = DEF_CELL_GAP;
 
     /**
@@ -148,7 +160,7 @@ public final class PctLife extends JFrame implements ActionListener {
 
     class WindowExit extends WindowAdapter {
 	@Override
-	public void windowClosing(WindowEvent wev) {
+	public void windowClosing(final WindowEvent wev) {
 	    System.exit(0);
 	}
     }

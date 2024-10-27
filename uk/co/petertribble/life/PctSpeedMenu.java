@@ -22,7 +22,9 @@
 
 package uk.co.petertribble.life;
 
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import javax.swing.ButtonGroup;
 import javax.swing.JMenu;
 import javax.swing.JRadioButtonMenuItem;
@@ -51,11 +53,11 @@ public final class PctSpeedMenu extends JMenu implements ActionListener {
     /**
      * Create a menu to allow game speed to be selected for the given board.
      *
-     * @param board the board to set the speed for
+     * @param nboard the board to set the speed for
      */
-    public PctSpeedMenu(final PctBoard board) {
+    public PctSpeedMenu(final PctBoard nboard) {
 	super("Speed");
-	this.board = board;
+	board = nboard;
 
 	setMnemonic(KeyEvent.VK_S);
 	slowSpeed = new JRadioButtonMenuItem("Slow");
