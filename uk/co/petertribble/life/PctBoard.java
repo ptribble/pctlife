@@ -163,10 +163,8 @@ public final class PctBoard extends JPanel implements ActionListener {
 			} catch (NumberFormatException nfe) {
 			    return false;
 			}
-		    } else if (line.startsWith("#")) { // NOPMD
-			// continue
-			// FIXME check for #R and #N
-		    } else {
+		    } else if (!line.startsWith("#")) {
+			// skip any other directives like #R and #N
 			// read the pattern and populate the board
 			for (int i = 0; i < line.length(); i++) {
 			    final char c = line.charAt(i);
