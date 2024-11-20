@@ -86,17 +86,18 @@ public final class PctBoard extends JPanel implements ActionListener {
      */
     public PctBoard(final int nboardSize, final int ncellSize,
 		    final int cellGap) {
+	super();
 	boardSize = nboardSize;
 	cellSize = ncellSize;
-	boardMid = boardSize/2;
+	boardMid = boardSize / 2;
 	dCellGap = cellGap;
 
-	oldgen = new int[boardSize+2][boardSize+2];
-	newgen = new int[boardSize+2][boardSize+2];
+	oldgen = new int[boardSize + 2][boardSize + 2];
+	newgen = new int[boardSize + 2][boardSize + 2];
 	labels = new boolean[boardSize][boardSize];
 
-	final Dimension dboard = new Dimension(boardSize*(cellSize+cellGap),
-					boardSize*(cellSize+cellGap));
+	final Dimension dboard = new Dimension(boardSize * (cellSize + cellGap),
+					boardSize * (cellSize + cellGap));
 	setSize(dboard);
 	setMinimumSize(dboard);
 	setPreferredSize(dboard);
@@ -109,16 +110,16 @@ public final class PctBoard extends JPanel implements ActionListener {
     public void randomize() {
 	for (int i = 0; i < boardSize; i++) {
 	    for (int j = 0; j < boardSize; j++) {
-		oldgen[i+1][j+1] = Math.random() < FILL_FACTOR ? 1 : 0;
-		labels[i][j] = oldgen[i+1][j+1] == 1;
+		oldgen[i + 1][j + 1] = Math.random() < FILL_FACTOR ? 1 : 0;
+		labels[i][j] = oldgen[i + 1][j + 1] == 1;
 	    }
 	}
 	repaint();
     }
 
     private void blank() {
-	for (int i = 0; i < boardSize+2; i++) {
-	    for (int j = 0; j < boardSize+2; j++) {
+	for (int i = 0; i < boardSize + 2; i++) {
+	    for (int j = 0; j < boardSize + 2; j++) {
 		oldgen[i][j] = 0;
 	    }
 	}
@@ -191,7 +192,7 @@ public final class PctBoard extends JPanel implements ActionListener {
     }
 
     private void setAlive(final int iii, final int jjj) {
-	oldgen[iii+1][jjj+1] = 1;
+	oldgen[iii + 1][jjj + 1] = 1;
 	labels[iii][jjj] = true;
     }
 
@@ -203,53 +204,53 @@ public final class PctBoard extends JPanel implements ActionListener {
     public void step() {
 	for (int i = 0; i < boardSize; i++) {
 	    for (int j = 0; j < boardSize; j++) {
-		newgen[i+1][j+1] = oldgen[i][j]
-		    + oldgen[i+1][j]
-		    + oldgen[i+2][j]
-		    + oldgen[i][j+1]
-		    + oldgen[i+2][j+1]
-		    + oldgen[i][j+2]
-		    + oldgen[i+1][j+2]
-		    + oldgen[i+2][j+2];
+		newgen[i + 1][j + 1] = oldgen[i][j]
+		    + oldgen[i + 1][j]
+		    + oldgen[i + 2][j]
+		    + oldgen[i][j + 1]
+		    + oldgen[i + 2][j + 1]
+		    + oldgen[i][j + 2]
+		    + oldgen[i + 1][j + 2]
+		    + oldgen[i + 2][j + 2];
 	    }
 	}
 	// do edges
 	for (int i = 0; i < boardSize; i++) {
-	    newgen[i+1][0] = oldgen[i][0]
-		    + oldgen[i+2][0]
+	    newgen[i + 1][0] = oldgen[i][0]
+		    + oldgen[i + 2][0]
 		    + oldgen[i][1]
-		    + oldgen[i+1][1]
-		    + oldgen[i+2][1];
-	    newgen[i+1][boardSize+1] = oldgen[i][boardSize+1]
-		    + oldgen[i+2][boardSize+1]
+		    + oldgen[i + 1][1]
+		    + oldgen[i + 2][1];
+	    newgen[i + 1][boardSize + 1] = oldgen[i][boardSize + 1]
+		    + oldgen[i + 2][boardSize + 1]
 		    + oldgen[i][boardSize]
-		    + oldgen[i+1][boardSize]
-		    + oldgen[i+2][boardSize];
+		    + oldgen[i + 1][boardSize]
+		    + oldgen[i + 2][boardSize];
 	}
 	for (int j = 0; j < boardSize; j++) {
-		newgen[0][j+1] = oldgen[0][j]
-		    + oldgen[0][j+2]
+		newgen[0][j + 1] = oldgen[0][j]
+		    + oldgen[0][j + 2]
 		    + oldgen[1][j]
-		    + oldgen[1][j+1]
-		    + oldgen[1][j+2];
-		newgen[boardSize+1][j+1] = oldgen[boardSize+1][j]
-		    + oldgen[boardSize+1][j+2]
+		    + oldgen[1][j + 1]
+		    + oldgen[1][j + 2];
+		newgen[boardSize + 1][j + 1] = oldgen[boardSize + 1][j]
+		    + oldgen[boardSize + 1][j + 2]
 		    + oldgen[boardSize][j]
-		    + oldgen[boardSize][j+1]
-		    + oldgen[boardSize][j+2];
+		    + oldgen[boardSize][j + 1]
+		    + oldgen[boardSize][j + 2];
 	}
 	// end edges
 	// do corners
 	newgen[0][0] = oldgen[0][1] + oldgen[1][1] + oldgen[1][0];
-	newgen[0][boardSize+1] = oldgen[0][boardSize] + oldgen[1][boardSize]
-	    + oldgen[1][boardSize+1];
-	newgen[boardSize+1][0] = oldgen[boardSize][0] + oldgen[boardSize][1]
-	    + oldgen[boardSize+1][1];
-	newgen[boardSize+1][boardSize+1] = oldgen[boardSize][boardSize+1]
-	    + oldgen[boardSize+1][boardSize] + oldgen[boardSize][boardSize];
+	newgen[0][boardSize + 1] = oldgen[0][boardSize] + oldgen[1][boardSize]
+	    + oldgen[1][boardSize + 1];
+	newgen[boardSize + 1][0] = oldgen[boardSize][0] + oldgen[boardSize][1]
+	    + oldgen[boardSize + 1][1];
+	newgen[boardSize + 1][boardSize + 1] = oldgen[boardSize][boardSize + 1]
+	    + oldgen[boardSize + 1][boardSize] + oldgen[boardSize][boardSize];
 	// end corners
-	for (int i = 0; i < boardSize+2; i++) {
-	    for (int j = 0; j < boardSize+2; j++) {
+	for (int i = 0; i < boardSize + 2; i++) {
+	    for (int j = 0; j < boardSize + 2; j++) {
 		if (oldgen[i][j] == 1) {
 		    oldgen[i][j] = isAlive(newgen[i][j]) ? 1 : 0;
 		} else {
@@ -259,7 +260,7 @@ public final class PctBoard extends JPanel implements ActionListener {
 	}
 	for (int i = 0; i < boardSize; i++) {
 	    for (int j = 0; j < boardSize; j++) {
-		labels[i][j] = oldgen[i+1][j+1] == 1;
+		labels[i][j] = oldgen[i + 1][j + 1] == 1;
 	    }
 	}
 	repaint();
@@ -319,10 +320,12 @@ public final class PctBoard extends JPanel implements ActionListener {
 
     /**
      * Start the game.
+     *
+     * @param idelay the starting delay in milliseconds.
      */
-    public void startLoop() {
+    public void startLoop(final int idelay) {
 	if (timer == null) {
-	    timer = new Timer(PctLife.INTERVAL, this);
+	    timer = new Timer(idelay, this);
 	}
 	timer.start();
     }
@@ -358,14 +361,15 @@ public final class PctBoard extends JPanel implements ActionListener {
 	gr2.setPaint(deadcolor);
 	gr2.fill(new Rectangle2D.Double(0.0d, 0.0d, d.width, d.height));
 	gr2.setPaint(livecolor);
-	final double dww = d.width/((double) boardSize);
-	final double dhh = d.height/((double) boardSize);
-	final double ddw = cellSize*dww/(cellSize + dCellGap);
-	final double ddh = cellSize*dhh/(cellSize + dCellGap);
+	final double dww = d.width / ((double) boardSize);
+	final double dhh = d.height / ((double) boardSize);
+	final double ddw = cellSize * dww / (cellSize + dCellGap);
+	final double ddh = cellSize * dhh / (cellSize + dCellGap);
 	for (int i = 0; i < boardSize; i++) {
 	    for (int j = 0; j < boardSize; j++) {
 		if (labels[i][j]) {
-		    gr2.fill(new Rectangle2D.Double(dww*i, dhh*j, ddw, ddh));
+		    gr2.fill(new Rectangle2D.Double(
+					     dww * i, dhh * j, ddw, ddh));
 		}
 	    }
 	}

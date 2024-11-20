@@ -45,10 +45,9 @@ public final class PctLife extends JFrame implements ActionListener {
     private PctBoard board;
 
     /**
-     * The update interval, 0.4s.
+     * The starting update interval, in milliseconds, 0.4s.
      */
-    public static final int INTERVAL = 400;
-
+    private static final int INTERVAL = 400;
     /**
      * The default size in cells of the life board. This is the visible size,
      * there will always be an invisible 1-cell strip around the border.
@@ -140,7 +139,7 @@ public final class PctLife extends JFrame implements ActionListener {
 	final JMenuBar jmb = new JMenuBar();
 	jmb.add(jmf);
 	jmb.add(new PctColorMenu(board));
-	jmb.add(new PctSpeedMenu(board));
+	jmb.add(new PctSpeedMenu(board, INTERVAL));
 	setJMenuBar(jmb);
 
 	setIconImage(new ImageIcon(this.getClass().getClassLoader().
@@ -155,7 +154,7 @@ public final class PctLife extends JFrame implements ActionListener {
 	    }
 	}
 	setVisible(true);
-	board.startLoop();
+	board.startLoop(INTERVAL);
     }
 
     class WindowExit extends WindowAdapter {

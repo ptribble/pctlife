@@ -38,7 +38,8 @@ public final class PctSpeedMenu extends JMenu implements ActionListener {
 
     /** The board to apply the speed change to. */
     private final PctBoard board;
-
+    /** The default update delay. */
+    private final int delay;
     /** Menu Item for a slow speed. */
     private final JRadioButtonMenuItem slowSpeed;
     /** Menu Item for normal speed. */
@@ -54,10 +55,12 @@ public final class PctSpeedMenu extends JMenu implements ActionListener {
      * Create a menu to allow game speed to be selected for the given board.
      *
      * @param nboard the board to set the speed for
+     * @param idelay the starting delay in milliseconds.
      */
-    public PctSpeedMenu(final PctBoard nboard) {
+    public PctSpeedMenu(final PctBoard nboard, final int idelay) {
 	super("Speed");
 	board = nboard;
+	delay = idelay;
 
 	setMnemonic(KeyEvent.VK_S);
 	slowSpeed = new JRadioButtonMenuItem("Slow");
@@ -92,13 +95,13 @@ public final class PctSpeedMenu extends JMenu implements ActionListener {
     @Override
     public void actionPerformed(final ActionEvent aev) {
 	if (aev.getSource() == slowSpeed) {
-	    board.setDelay(2*PctLife.INTERVAL);
+	    board.setDelay(2 * delay);
 	} else if (aev.getSource() == normSpeed) {
-	    board.setDelay(PctLife.INTERVAL);
+	    board.setDelay(delay);
 	} else if (aev.getSource() == fastSpeed) {
-	    board.setDelay(PctLife.INTERVAL/2);
+	    board.setDelay(delay / 2);
 	} else if (aev.getSource() == zoomSpeed) {
-	    board.setDelay(PctLife.INTERVAL/8);
+	    board.setDelay(delay / 8);
 	} else if (aev.getSource() == insaneSpeed) {
 	    board.setDelay(1);
 	}
