@@ -31,8 +31,8 @@ import java.awt.event.ActionListener;
 import java.awt.geom.Rectangle2D;
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -146,8 +146,7 @@ public final class PctBoard extends JPanel implements ActionListener {
 	int x = 0;
 	int xblock = 0;
 	int y = 0;
-	try (BufferedReader input =  new BufferedReader(
-						new FileReader(infile))) {
+	try (BufferedReader input =  Files.newBufferedReader(infile.toPath())) {
 	    String line;
 	    try {
 		line = input.readLine();
