@@ -29,16 +29,9 @@ package|-package)
 	./pkg/mkproto > pp
 	pkgmk -d /tmp -f pp -r $(pwd) TRIBpctlife
 	pkgtrans -s /tmp /tmp/TRIBpctlife.pkg TRIBpctlife
-	rm pp
-	cd /tmp || exit 1
-	if [ -x "${THOME}/build/create_zap_from_pkg" ]; then
-	    "${THOME}/build/create_zap_from_pkg" TRIBpctlife /tmp/TRIBpctlife.pkg
-	else
-	    zip -q -r TRIBpctlife TRIBpctlife
-	    mv TRIBpctlife.zip TRIBpctlife.zap
-	    ls -l /tmp/TRIBpctlife.pkg /tmp/TRIBpctlife.zap
-	fi
 	rm -fr /tmp/TRIBpctlife
+	ls -l /tmp/TRIBpctlife.pkg
+	rm pp
 	exit 0
 	;;
 pmd|-pmd)
