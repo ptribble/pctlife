@@ -2,6 +2,9 @@
 #
 # SPDX-License-Identifier: CDDL-1.0
 #
+# Copyright 2025 Peter Tribble
+#
+
 #
 # run
 # ./build pmd
@@ -13,19 +16,19 @@ PMDRULES="./pmd-ruleset.xml"
 PMDCACHE="${HOME}/.pmd/cache.pctflie"
 
 case $1 in
-build|-build)
+build)
 	javac -Xlint uk/co/petertribble/life/*.java
 	jar -cmf life.manifest life.jar uk/co/petertribble/life/*.class pixmaps/pctlife.png
 	rm uk/co/petertribble/life/*.class
 	exit 0
 	;;
-javadoc|-javadoc)
+javadoc)
 	rm -fr javadoc
 	mkdir javadoc
 	javadoc -Xdoclint:all -d javadoc uk.co.petertribble.life
 	exit 0
 	;;
-package|-package)
+package)
 	./pkg/mkproto > pp
 	pkgmk -d /tmp -f pp -r $(pwd) TRIBpctlife
 	pkgtrans -s /tmp /tmp/TRIBpctlife.pkg TRIBpctlife
@@ -34,7 +37,7 @@ package|-package)
 	rm pp
 	exit 0
 	;;
-pmd|-pmd)
+pmd)
 	if [ ! -d "${HOME}/.pmd" ]; then
 	    mkdir -p "${HOME}/.pmd"
 	fi
