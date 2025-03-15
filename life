@@ -13,7 +13,7 @@
 # new PMD version 7 only has categories, configured in pmd-ruleset.xml
 #
 PMDRULES="./pmd-ruleset.xml"
-PMDCACHE="${HOME}/.pmd/cache.pctflie"
+PMDCACHE="${HOME}/.pmd/cache.pctlife"
 
 case $1 in
 build)
