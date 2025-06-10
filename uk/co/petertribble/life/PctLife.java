@@ -188,7 +188,7 @@ public final class PctLife extends JFrame implements ActionListener {
      */
     public static void main(final String[] args) {
 	if (args.length > 0) {
-	    int i = 0; //NOPMD
+	    int i = 0;
 	    while (i < args.length) {
 		if ("-s".equals(args[i])) {
 		    ++i;
