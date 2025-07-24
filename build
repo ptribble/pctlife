@@ -1,0 +1,48 @@
+#!/bin/sh
+#
+# SPDX-License-Identifier: CDDL-1.0
+#
+# Copyright 2025 Peter Tribble
+#
+
+PATH=/usr/jdk/instances/jdk11/bin:$PATH
+export PATH
+
+#
+# run
+# ./build pmd
+# to use this, you must have pmd in your path
+#
+# new PMD version 7 only has categories, configured in pmd-ruleset.xml
+#
+PMDRULES="./pmd-ruleset.xml"
+PMDCACHE="${HOME}/.pmd/cache.pctlife"
+
+case $1 in
+javadoc)
+	rm -fr javadoc
+	mkdir javadoc
+	javadoc -Xdoclint:all -d javadoc uk.co.petertribble.life
+	exit 0
+	;;
+package)
+	./pkg/mkproto > pp
+	pkgmk -d /tmp -f pp -r $(pwd) TRIBpctlife
+	pkgtrans -s /tmp /tmp/TRIBpctlife.pkg TRIBpctlife
+	rm -fr /tmp/TRIBpctlife
+	ls -l /tmp/TRIBpctlife.pkg
+	rm pp
+	exit 0
+	;;
+pmd)
+	if [ ! -d "${HOME}/.pmd" ]; then
+	    mkdir -p "${HOME}/.pmd"
+	fi
+	pmd check --cache "${PMDCACHE}" -d uk -R "${PMDRULES}" --use-version java-11 --aux-classpath $(echo lib/java/* | sed 's= =:=g') 2>/dev/null
+	exit 0
+	;;
+esac
+
+javac -Xlint uk/co/petertribble/life/*.java
+jar -cmf life.manifest life.jar uk/co/petertribble/life/*.class pixmaps/pctlife.png
+rm uk/co/petertribble/life/*.class
