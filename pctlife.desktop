@@ -1,5 +1,6 @@
+# SPDX-FileCopyrightText: 2025 Peter Tribble
+# SPDX-License-Identifier: CDDL-1.0
 [Desktop Entry]
-Encoding=UTF-8
 Version=1.0
 Name=Pct Life
 Comment=John Conway's Game of Life, in Java
@@ -7,4 +8,4 @@ Exec=pctlife
 Icon=pctlife
 Terminal=false
 Type=Application
-Categories=Application;Game;
+Categories=Game;
