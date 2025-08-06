@@ -41,6 +41,15 @@ pmd)
 	pmd check --cache "${PMDCACHE}" -d uk -R "${PMDRULES}" --use-version java-11 --aux-classpath $(echo lib/java/* | sed 's= =:=g') 2>/dev/null
 	exit 0
 	;;
+spotbugs)
+	#
+	# spotbugs works on the class files, so those need to be available
+	#
+	javac -Xlint uk/co/petertribble/life/*.java
+	spotbugs -auxclasspath life.jar uk
+	rm uk/co/petertribble/life/*.class
+	exit 0
+	;;
 esac
 
 javac -Xlint uk/co/petertribble/life/*.java
