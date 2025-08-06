@@ -44,9 +44,9 @@ public final class PctBoard extends JPanel implements ActionListener {
     /** The initial filling factor. */
     private static final double FILL_FACTOR = 0.15d;
     /** The initial colour of live cells. */
-    private static Color livecolor = Color.RED;
+    private Color livecolor = Color.RED;
     /** The initial colour of dead cells. */
-    private static Color deadcolor = Color.black;
+    private Color deadcolor = Color.black;
 
     /** The current size in cells of the board. */
     private final int boardSize;
@@ -280,7 +280,7 @@ public final class PctBoard extends JPanel implements ActionListener {
      *
      * @return The current Color of live cells.
      */
-    public static Color getLiveColor() {
+    public Color getLiveColor() {
 	return livecolor;
     }
 
@@ -300,7 +300,7 @@ public final class PctBoard extends JPanel implements ActionListener {
      *
      * @return The current Color of dead cells.
      */
-    public static Color getDeadColor() {
+    public Color getDeadColor() {
 	return deadcolor;
     }
 
