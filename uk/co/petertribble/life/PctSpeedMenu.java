@@ -44,10 +44,10 @@ public final class PctSpeedMenu extends JMenu implements ActionListener {
     private final JRadioButtonMenuItem normSpeed;
     /** Menu Item for a fast speed. */
     private final JRadioButtonMenuItem fastSpeed;
-    /** Menu Item for a zoom speed. */
-    private final JRadioButtonMenuItem zoomSpeed;
-    /** Menu Item for an insane speed. */
-    private final JRadioButtonMenuItem insaneSpeed;
+    /** Menu Item for a faster speed. */
+    private final JRadioButtonMenuItem fasterSpeed;
+    /** Menu Item for the fastest speed. */
+    private final JRadioButtonMenuItem fastestSpeed;
 
     /**
      * Create a menu to allow game speed to be selected for the given board.
@@ -73,21 +73,21 @@ public final class PctSpeedMenu extends JMenu implements ActionListener {
 	fastSpeed.setMnemonic(KeyEvent.VK_F);
 	fastSpeed.addActionListener(this);
 	add(fastSpeed);
-	zoomSpeed = new JRadioButtonMenuItem("Zoom");
-	zoomSpeed.setMnemonic(KeyEvent.VK_Z);
-	zoomSpeed.addActionListener(this);
-	add(zoomSpeed);
-	insaneSpeed = new JRadioButtonMenuItem("Insane");
-	insaneSpeed.setMnemonic(KeyEvent.VK_I);
-	insaneSpeed.addActionListener(this);
-	add(insaneSpeed);
+	fasterSpeed = new JRadioButtonMenuItem("Faster");
+	fasterSpeed.setMnemonic(KeyEvent.VK_Z);
+	fasterSpeed.addActionListener(this);
+	add(fasterSpeed);
+	fastestSpeed = new JRadioButtonMenuItem("Fastest");
+	fastestSpeed.setMnemonic(KeyEvent.VK_I);
+	fastestSpeed.addActionListener(this);
+	add(fastestSpeed);
 
 	final ButtonGroup bgroup = new ButtonGroup();
 	bgroup.add(slowSpeed);
 	bgroup.add(normSpeed);
 	bgroup.add(fastSpeed);
-	bgroup.add(zoomSpeed);
-	bgroup.add(insaneSpeed);
+	bgroup.add(fasterSpeed);
+	bgroup.add(fastestSpeed);
     }
 
     @Override
@@ -98,9 +98,9 @@ public final class PctSpeedMenu extends JMenu implements ActionListener {
 	    board.setDelay(delay);
 	} else if (aev.getSource() == fastSpeed) {
 	    board.setDelay(delay / 2);
-	} else if (aev.getSource() == zoomSpeed) {
+	} else if (aev.getSource() == fasterSpeed) {
 	    board.setDelay(delay / 8);
-	} else if (aev.getSource() == insaneSpeed) {
+	} else if (aev.getSource() == fastestSpeed) {
 	    board.setDelay(1);
 	}
     }
