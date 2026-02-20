@@ -65,15 +65,15 @@ public final class PctBoard extends JPanel implements ActionListener {
     /**
      * An array of int[] for the current generation.
      */
-    private int[][] oldgen;
+    private final int[][] oldgen;
     /**
      * An array of int[] for the next generation.
      */
-    private int[][] newgen;
+    private final int[][] newgen;
     /**
      * An array of boolean[] to record the liveness of a cell.
      */
-    private boolean[][] labels;
+    private final boolean[][] labels;
 
     /**
      * Construct a new PctBoard instance of the given size.
