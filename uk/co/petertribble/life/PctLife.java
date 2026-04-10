@@ -14,7 +14,7 @@
  *
  * CDDL HEADER END
  *
- * Copyright 2025 Peter Tribble
+ * Copyright 2026 Peter Tribble
  *
  */
 
@@ -62,17 +62,32 @@ public final class PctLife extends JFrame implements ActionListener {
      */
     private static final int DEF_CELL_SIZE = 5;
     /**
+     * The minimum size, in pixels, of each cell.
+     */
+    private static final int MIN_CELL_SIZE = 1;
+
+    /**
      * The default gap between cells, in pixels.
      */
     private static final int DEF_CELL_GAP = 1;
     /**
-     * The minimum size, in pixels, of each cell.
-     */
-    private static final int MIN_CELL_SIZE = 1;
-    /**
      * The maximum gap between cells, in pixels.
      */
     private static final int MAX_CELL_GAP = 3;
+
+    /**
+     * The default density of cells, in other words the fraction of the board
+     * that will be covered by cells.
+     */
+    private static final double DEF_CELL_DENSITY = 0.15d;
+    /**
+     * The minimum initial cell density.
+     */
+    private static final double MIN_CELL_DENSITY = 0.01d;
+    /**
+     * The maximum initial cell density.
+     */
+    private static final double MAX_CELL_DENSITY = 0.99d;
 
     /**
      * Menu button to exit the application.
@@ -98,6 +113,10 @@ public final class PctLife extends JFrame implements ActionListener {
      * The gap between cells, in pixels.
      */
     private static int cellGap = DEF_CELL_GAP;
+    /**
+     * The gap between cells, in pixels.
+     */
+    private static double cellDensity = DEF_CELL_DENSITY;
 
     /**
      * Construct a new PctLife instance, starting with a random pattern.
@@ -145,7 +164,7 @@ public final class PctLife extends JFrame implements ActionListener {
 
 	pack();
 	if (infile == null) {
-	    board.randomize();
+	    board.randomize(cellDensity);
 	} else {
 	    if (!board.loadPattern(infile)) {
 		bailOut("Failed to load pattern");
@@ -165,7 +184,7 @@ public final class PctLife extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(final ActionEvent aev) {
 	if (aev.getSource() == newItem) {
-	    board.randomize();
+	    board.randomize(cellDensity);
 	} else if (aev.getSource() == stopItem) {
 	    board.stopstart();
 	} else if (aev.getSource() == exitItem) {
@@ -183,6 +202,7 @@ public final class PctLife extends JFrame implements ActionListener {
      * -b The board size
      * -g The gap between cells
      * -s The size of each cell
+     * -d The initial cell density
      *
      * @param args command line arguments
      */
@@ -224,7 +244,7 @@ public final class PctLife extends JFrame implements ActionListener {
 			try {
 			    cellGap = Integer.parseInt(args[i]);
 			} catch (NumberFormatException ex) {
-			    bailOut("Invalid call gap!");
+			    bailOut("Invalid cell gap!");
 			}
 			if (cellGap < 0) {
 			    bailOut("Cell gap too small!");
@@ -234,6 +254,23 @@ public final class PctLife extends JFrame implements ActionListener {
 			}
 		    } else {
 			bailOut("Expecting an argument to -g!");
+		    }
+		} else if ("-d".equals(args[i])) {
+		    ++i;
+		    if (i < args.length) {
+			try {
+			    cellDensity = Double.parseDouble(args[i]);
+			} catch (NumberFormatException ex) {
+			    bailOut("Invalid cell density!");
+			}
+			if (cellDensity < MIN_CELL_DENSITY) {
+			    bailOut("Cell density too small!");
+			}
+			if (cellDensity > MAX_CELL_DENSITY) {
+			    bailOut("Cell density too large!");
+			}
+		    } else {
+			bailOut("Expecting an argument to -d!");
 		    }
 		} else {
 		    break;

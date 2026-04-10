@@ -14,7 +14,7 @@
  *
  * CDDL HEADER END
  *
- * Copyright 2025 Peter Tribble
+ * Copyright 2026 Peter Tribble
  *
  */
 
@@ -41,8 +41,6 @@ public final class PctBoard extends JPanel implements ActionListener {
 
     private static final long serialVersionUID = 1L;
 
-    /** The initial filling factor. */
-    private static final double FILL_FACTOR = 0.15d;
     /** The initial colour of live cells. */
     private Color livecolor = Color.RED;
     /** The initial colour of dead cells. */
@@ -104,11 +102,13 @@ public final class PctBoard extends JPanel implements ActionListener {
 
     /**
      * Populate the board with random data.
+     *
+     * @param cellDensity the frcation of the board to be covered by cells
      */
-    public void randomize() {
+    public void randomize(final double cellDensity) {
 	for (int i = 0; i < boardSize; i++) {
 	    for (int j = 0; j < boardSize; j++) {
-		oldgen[i + 1][j + 1] = Math.random() < FILL_FACTOR ? 1 : 0;
+		oldgen[i + 1][j + 1] = Math.random() < cellDensity ? 1 : 0;
 		labels[i][j] = oldgen[i + 1][j + 1] == 1;
 	    }
 	}

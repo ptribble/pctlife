@@ -2,7 +2,7 @@
 #
 # SPDX-License-Identifier: CDDL-1.0
 #
-# Copyright 2025 Peter Tribble
+# Copyright 2026 Peter Tribble
 #
 
 PATH=/usr/jdk/instances/jdk11/bin:$PATH
@@ -12,4 +12,5 @@ export PATH
 # -b board size (default 128)
 # -g cell gap (default 1)
 # -s cell size (default 5)
+# -d cell density (default 0.15)
 exec java -jar life.jar "$@"
