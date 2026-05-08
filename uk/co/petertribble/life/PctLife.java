@@ -193,7 +193,7 @@ public final class PctLife extends JFrame implements ActionListener {
     }
 
     private static void bailOut(final String msg) {
-	System.err.println(msg); //NOPMD
+	System.err.println(msg); // NOPMD
 	System.exit(1);
     }
 

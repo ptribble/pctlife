@@ -22,8 +22,8 @@ package uk.co.petertribble.life;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Graphics2D;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.Rectangle2D;
@@ -196,7 +196,7 @@ public final class PctBoard extends JPanel implements ActionListener {
     /**
      * Run one step of the game.
      *
-     * Essentially, just add up the values of the neighbouring cells.
+     * <p>Essentially, just add up the values of the neighbouring cells.
      */
     public void step() {
 	for (int i = 0; i < boardSize; i++) {
