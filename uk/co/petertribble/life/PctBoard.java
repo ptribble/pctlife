@@ -53,7 +53,7 @@ public final class PctBoard extends JPanel implements ActionListener {
     /** The current cell size in pixels. */
     private final int cellSize;
     /** The gap left between cells as a double. */
-    private final double dCellGap;
+    private final double dcellGap;
 
     /**
      * A Timer, to update the model in a loop.
@@ -86,7 +86,7 @@ public final class PctBoard extends JPanel implements ActionListener {
 	boardSize = nboardSize;
 	cellSize = ncellSize;
 	boardMid = boardSize / 2;
-	dCellGap = cellGap;
+	dcellGap = cellGap;
 
 	oldgen = new int[boardSize + 2][boardSize + 2];
 	newgen = new int[boardSize + 2][boardSize + 2];
@@ -360,8 +360,8 @@ public final class PctBoard extends JPanel implements ActionListener {
 	gr2.setPaint(livecolor);
 	final double dww = d.width / ((double) boardSize);
 	final double dhh = d.height / ((double) boardSize);
-	final double ddw = cellSize * dww / (cellSize + dCellGap);
-	final double ddh = cellSize * dhh / (cellSize + dCellGap);
+	final double ddw = cellSize * dww / (cellSize + dcellGap);
+	final double ddh = cellSize * dhh / (cellSize + dcellGap);
 	for (int i = 0; i < boardSize; i++) {
 	    for (int j = 0; j < boardSize; j++) {
 		if (labels[i][j]) {
