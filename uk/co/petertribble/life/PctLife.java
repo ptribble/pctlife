@@ -86,7 +86,7 @@ public final class PctLife extends JFrame implements ActionListener {
      */
     private static final double MAX_CELL_DENSITY = 0.99d;
 
-        /**
+    /**
      * The size in cells of the life board.
      */
     private static int boardSize = DEF_BOARD_SIZE;
