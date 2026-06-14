@@ -39,9 +39,6 @@ public final class PctLife extends JFrame implements ActionListener {
 
     private static final long serialVersionUID = 1L;
 
-    /** The board to be shown. */
-    private PctBoard board;
-
     /**
      * The starting update interval, in milliseconds, 0.4s.
      */
@@ -89,19 +86,7 @@ public final class PctLife extends JFrame implements ActionListener {
      */
     private static final double MAX_CELL_DENSITY = 0.99d;
 
-    /**
-     * Menu button to exit the application.
-     */
-    private JMenuItem exitItem;
-    /**
-     * Menu button to start a new game.
-     */
-    private JMenuItem newItem;
-    /**
-     * Menu button to stop the current game.
-     */
-    private JMenuItem stopItem;
-    /**
+        /**
      * The size in cells of the life board.
      */
     private static int boardSize = DEF_BOARD_SIZE;
@@ -117,6 +102,24 @@ public final class PctLife extends JFrame implements ActionListener {
      * The gap between cells, in pixels.
      */
     private static double cellDensity = DEF_CELL_DENSITY;
+
+    /**
+     * The board to be shown.
+     */
+    private PctBoard board;
+
+    /**
+     * Menu button to exit the application.
+     */
+    private JMenuItem exitItem;
+    /**
+     * Menu button to start a new game.
+     */
+    private JMenuItem newItem;
+    /**
+     * Menu button to stop the current game.
+     */
+    private JMenuItem stopItem;
 
     /**
      * Construct a new PctLife instance, starting with a random pattern.
